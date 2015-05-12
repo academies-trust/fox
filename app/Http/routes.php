@@ -11,11 +11,10 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+/**
+ * Displays Angular SPA application
+ */
 
-Route::get('home', 'HomeController@index');
-
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+Route::get('/', function () {
+    return view('spa');
+});

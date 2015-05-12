@@ -2,6 +2,7 @@
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Response;
 
 class Handler extends ExceptionHandler {
 
@@ -36,7 +37,11 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
-		return parent::render($request, $e);
+		if($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
+	    {
+	        return Response::make(view('spa'), 200);;
+	    }
+	    return parent::render($request, $e);
 	}
 
 }
