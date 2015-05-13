@@ -12,15 +12,6 @@ angular.module('posts', [
 					},
 				}
 			})
-			.state('sb.eventsCreate', {
-				url: '/events/create',
-				views: {
-					'events@': {
-						controller: 'EventsCtrl as evm',
-						templateUrl: 'app/events/create/event-create.tmpl.html'
-					},
-				}
-			})
 	})
 	.controller('PostsCtrl', function PostsCtrl($stateParams, EventsModel) {
 		var evm = this;

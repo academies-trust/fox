@@ -57,6 +57,10 @@
     </div>
     <div class="container-fluid" ng-if="AppCtrl.hasToken()" id="main">
         <div class="row">
+            <div class="col-md-12" ui-view="forms">
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-3" ui-view="groups">
             </div>
             <div class="col-md-9" ui-view="posts">

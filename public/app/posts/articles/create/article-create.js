@@ -4,11 +4,23 @@ angular.module('articles.create', [])
 			.state('fox.articles.create', {
 				url: '/articles/create',
 				views: {
-					'posts@': {
-						controller: 'ArticlesController',
+					'forms@': {
+						controller: 'CreateArticleController as createArtCtrl',
 						templateUrl: 'app/posts/articles/create/article-create.tmpl.html'
 					},
+					'posts@' : {
+						controller: 'ArticlesController',
+						templateUrl: 'app/posts/articles/list/article-list.tmpl.html'
+					}
 				}
 			})
-	})
+		})
+		.controller('CreateArticleController', function createArticleController($stateParams, UserModel, filterFilter) {
+			create = this;
+
+			create.getGroupsWhereCan = function(permission)
+			{
+				return UserModel.getGroupsWhereCan(permission);
+			}
+		})
 ;

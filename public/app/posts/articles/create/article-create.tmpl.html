@@ -11,8 +11,8 @@
 	                <div class="form-group">
 	                	<label for="client">Group</label>
 	                	<select required class="form-control" id="client" ng-model="newArticle.group">
-	                		<option ng-repeat="group in ArticleController.getGroups()" value="[[group.id]]">
-	                			[[client.name]]
+	                		<option ng-repeat="group in createArtCtrl.getGroupsWhereCan('write')" value="[[group.id]]">
+	                			[[group.name]]
 	                		</option>
 	                	</select>
 	                </div>

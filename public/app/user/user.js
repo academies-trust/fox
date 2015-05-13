@@ -6,8 +6,9 @@ angular.module('user', [
 	.controller('UserController', function UserController ()  {
 		user = this;
 
-		user.getGroups = function(permission) {
-			userModel.getGroups(permission);
+		user.test = function() {
+			alert('moo');
 		}
+
 	})
 ;

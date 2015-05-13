@@ -3,7 +3,7 @@ angular.module('user.login', [])
 		var auth = this;
 
 		auth.login = function(credentials) {
-            UserModel.login(credentials.username, credentials.password).then(function success(response) {
+            user = UserModel.login(credentials.username, credentials.password).then(function success(response) {
             	$scope.setCurrentUser(user);
             	authService.loginConfirmed();
             }, function() {
