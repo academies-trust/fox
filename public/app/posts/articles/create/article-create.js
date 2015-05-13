@@ -15,7 +15,7 @@ angular.module('articles.create', [])
 				}
 			})
 		})
-		.controller('CreateArticleController', function createArticleController($stateParams, UserModel, ArticlesModel, filterFilter) {
+		.controller('CreateArticleController', function createArticleController($stateParams, UserModel, ArticlesModel, filterFilter, $state) {
 			create = this;
 
 			create.getGroupsWhereCan = function(permission)	{
@@ -23,9 +23,9 @@ angular.module('articles.create', [])
 			}
 
 			create.create = function(article) {
-	            ArticleModel.createArticle(article)
+	            ArticlesModel.createArticle(article)
 				.then(function(result) {
-					// TBD sucess
+					$state.go('^');
 				});
 	        }
 		})

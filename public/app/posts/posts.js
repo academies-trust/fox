@@ -7,23 +7,20 @@ angular.module('posts', [
 				url: '/',
 				views: {
 					'posts@': {
-						controller: 'PostsCtrl as PostsCtrl',
+						controller: 'PostsCtrl as ArtCtrl',
 						templateUrl: 'app/posts/articles/list/article-list.tmpl.html',
 					},
 				}
 			})
 	})
-	.controller('PostsCtrl', function PostsCtrl($stateParams, EventsModel) {
-		var evm = this;
-		evm.create = create;
-
-		function create(client, title, description) {
-            EventsModel.createEvent(client, title, description)
-			.then(function(result) {
-				evm.events = result.data;
-				console.log(result);
+	.controller('PostsCtrl', function PostsCtrl($stateParams, ArticlesModel) {
+		var PostsCtrl = this;
+		PostsCtrl.getArticles = function() {
+			ArticlesModel.getArticles().then(function(res) {
+				PostsCtrl.articles = res.data.data;
 			});
-        }
+		}
+		PostsCtrl.getArticles();
 	})
 
 ;

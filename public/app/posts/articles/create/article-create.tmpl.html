@@ -7,10 +7,11 @@
                 <strong>Article Details</strong>
             </div>
             <div class="panel-body">
-            	<form ng-submit="ArticleController.create(newArticle)">
+            	<form ng-submit="createArtCtrl.create(newArticle)">
 	                <div class="form-group">
 	                	<label for="client">Group</label>
-	                	<select required class="form-control" id="client" ng-model="newArticle.group">
+	                	<select ng-init="newArticle.group = null" required class="form-control" id="client" ng-model="newArticle.group">
+	                		<option selected value="null">-- Please Select -- </option>
 	                		<option ng-repeat="group in createArtCtrl.getGroupsWhereCan('write')" value="[[group.id]]">
 	                			[[group.name]]
 	                		</option>
@@ -18,11 +19,27 @@
 	                </div>
 	                <div class="form-group">
 	                	<label for="title">Title</label>
-	                	<input type="text" class="form-control" id="title" maxlength="255" ng-model="newArticle.title">
+	                	<input type="text" required class="form-control" id="title" maxlength="255" ng-model="newArticle.title">
 	                </div>
 	                <div class="form-group">
-	                	<label for="content">Content (optional)</label>
-	                	<textarea class="form-control" id="content" ng-model="newArticle.content"></textarea>
+	                	<label for="content">Content</label>
+	                	<textarea required class="form-control" id="content" ng-model="newArticle.content"></textarea>
+	                </div>
+	                <div class="form-group">
+	                	<label for="published">Publish Date</label>
+	                	<input type="text" required class="form-control" id="published" maxlength="255" ng-model="newArticle.published">
+	                </div>
+	                <div class="checkbox">
+	                	<label for="comments">
+		                	<input type="checkbox" value="1" id="comments" ng-model="newArticle.comments">
+		                	Allow Comments
+	                	</label>
+	                </div>
+	                <div class="checkbox">
+	                	<label for="help">
+	                		<input type="checkbox" value="1" id="help" ng-model="newArticle.help">
+	                		Copy to Help Section?
+	                	</label>
 	                </div>
 	                <input type="submit" class="btn btn-primary btn-block" value="Create">
 	            </form>

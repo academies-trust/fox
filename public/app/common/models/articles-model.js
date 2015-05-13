@@ -7,8 +7,14 @@ angular.module('fox.models.articles', [
 		model.getArticles = function() {
             return $http.get(API_URL + '/articles');
         }
-        model.createArticle = function(client, title, description) {
-        	return $http.post(API_URL + '/articles', {title: title, description: description});
+        model.createArticle = function(article) {
+        	return $http.post(API_URL + '/groups/'+article.group+'/articles', {
+        		title: article.title,
+        		content: article.content,
+        		comments: article.comments,
+        		help: article.help,
+        		published: article.published,
+        	});
         }
 	})
 ;

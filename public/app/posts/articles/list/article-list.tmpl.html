@@ -2,12 +2,12 @@
     <div class="col-lg-8 col-lg-offset-2">
         <a ui-sref="fox.articles.create"><btn class="btn btn-primary pull-right">Add Article</btn></a>
         <h1>Articles</h1>
-        <div ng-repeat="event in evm.events.data" class="panel panel-default">
+        <div ng-repeat="article in ArtCtrl.articles" class="panel panel-default">
             <div class="panel-heading">
-                <strong>[[event.title]]</strong>
+                <strong>[[article.activeContent.data.title]]</strong>
             </div>
-            <div class="panel-body" ng-repeat="date in event.dates.data">
-                <h4>[[date.starts]]</h4> to <h4>[[date.ends]]</h4>
+            <div class="panel-body">
+                [[article.activeContent.data.content]]
             </div>
         </div>
     </div>
