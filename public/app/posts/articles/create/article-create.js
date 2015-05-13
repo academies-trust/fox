@@ -15,12 +15,18 @@ angular.module('articles.create', [])
 				}
 			})
 		})
-		.controller('CreateArticleController', function createArticleController($stateParams, UserModel, filterFilter) {
+		.controller('CreateArticleController', function createArticleController($stateParams, UserModel, ArticlesModel, filterFilter) {
 			create = this;
 
-			create.getGroupsWhereCan = function(permission)
-			{
+			create.getGroupsWhereCan = function(permission)	{
 				return UserModel.getGroupsWhereCan(permission);
 			}
+
+			create.create = function(article) {
+	            ArticleModel.createArticle(article)
+				.then(function(result) {
+					// TBD sucess
+				});
+	        }
 		})
 ;

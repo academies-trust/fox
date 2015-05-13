@@ -21,12 +21,6 @@ angular.module('articles', [
 	.controller('ArticlesController', function ArticlesController($stateParams, ArticlesModel, UserModel) {
 		var ArticlesCtrl = this;
 
-		ArticlesCtrl.create = function(client, title, description) {
-            EventsModel.createEvent(client, title, description)
-			.then(function(result) {
-				ArticlesCtrl.events = result.data;
-			});
-        }
 	})
 
 ;

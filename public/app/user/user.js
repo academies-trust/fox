@@ -6,9 +6,5 @@ angular.module('user', [
 	.controller('UserController', function UserController ()  {
 		user = this;
 
-		user.test = function() {
-			alert('moo');
-		}
-
 	})
 ;

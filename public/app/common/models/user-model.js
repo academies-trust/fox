@@ -53,9 +53,6 @@ angular.module('fox.models.user', ['http-auth-interceptor'])
         	storage.remove('token');
         }
 
-        model.isAuthorized = function() {
-        }
-
         model.isAuthenticated = function() {
         	return (storage.get('token') !== null);
         }

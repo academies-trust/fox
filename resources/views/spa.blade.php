@@ -29,16 +29,14 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a ui-sref="fox">Home</a></li>
-                    <li><a ng-href="#/">My Account</a></li>
-                    <li><a ng-href="#/signin">Signin</a></li>
-                    <li><a ng-href="#/signup">Signup</a></li>
-                    <li><a ng-controller="AuthCtrl as Auth" ng-click="Auth.logout()">Logout</a></li>
+                    <li><a ui-sref="fox" ng-if="AppCtrl.isAuthenticated()">Home</a></li>
+                    <li><a ng-href="#/" ng-if="AppCtrl.isAuthenticated()">My Account</a></li>
+                    <li><a ng-controller="AuthCtrl as Auth" ng-click="Auth.logout()" ng-if="AppCtrl.isAuthenticated()">Logout</a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="container" id="login" ng-if="!AppCtrl.hasToken()">
+    <div class="container" id="login" ng-if="!AppCtrl.isAuthenticated()">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <form ng-controller="AuthCtrl as Auth" ng-submit="Auth.login(credentials)">
@@ -55,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid" ng-if="AppCtrl.hasToken()" id="main">
+    <div class="container-fluid" ng-if="AppCtrl.isAuthenticated()" id="main">
         <div class="row">
             <div class="col-md-12" ui-view="forms">
             </div>

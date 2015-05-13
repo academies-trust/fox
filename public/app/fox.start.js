@@ -23,60 +23,24 @@ angular.module('fox', [
         'use strict';
         var fox = this;
         $scope.currentUser = null;
-        $scope.isAuthorized = UserModel.isAuthorized;
-
-        $rootScope.$on('auth-loginRequired', function() {
-            alert('login bitch');
-        })
 
         UserModel.getUser();
 
         $scope.setCurrentUser = function (user) {
             $scope.currentUser = user;
           };
-        /*if(storage.get('token')) {
-            fox.token = storage.get('token');
-            getUser();
-        }*/
 
-        /*fox.login = login;
-        fox.logout = logout;*/
 
-        fox.hasToken = hasToken;
-
-        function hasToken() {
-            hasToken = (storage.get('token') !== null);
-            return hasToken;
+        fox.isAuthenticated = function() {
+            return UserModel.isAuthenticated();
         }
 
-        /*function login(email, password) {
-            UserFactory.login(fox.email, fox.password).then(function success(response) {
-                fox.token = response.data.data.token;
-                storage.set('token', fox.token);
-                getUser();
-                location.reload();
-            }, handleError);
-        }*/
-
-        function logout() {
-            storage.remove('user');
-            storage.remove('token');
-        }
-
-        /*function getUser(){
-            UserFactory.getUser().then(function success(response) {
-                fox.user = response.data;
-                storage.set('user', fox.user);
-            }, handleError);
-        }*/
-
-        function handleError(response) {
+        fox.handleError = function(response) {
             alert('Error ' + response.data.error.http_code + ' - ' + response.data.error.message + ' (' + response.data.error.code + ')');
             if(response.data.error.http_code == 401) {
                 storage.remove('user');
             }
         }
-        fox.handleError = handleError;
     })
     .factory('TokenInterceptor', function TokenInterceptor(storage) {
         'use strict';
