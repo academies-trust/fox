@@ -1,4 +1,4 @@
-angular.module('articles.create', ['textAngular'])
+angular.module('articles.create', ['textAngular', 'pickadate'])
 	.config(function($stateProvider) {
 		$stateProvider
 			.state('fox.articles.create', {

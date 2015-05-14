@@ -18,7 +18,7 @@ angular.module('articles', [
 				}
 			})
 	})
-	.controller('ArticlesController', function ArticlesController($stateParams, ArticlesModel, UserModel, $sce) {
+	.controller('ArticlesController', function ArticlesController($stateParams, ArticlesModel, UserModel) {
 		var ArticlesCtrl = this;
 		ArticlesCtrl.getArticles = function() {
 			ArticlesModel.getArticles().then(function(res) {

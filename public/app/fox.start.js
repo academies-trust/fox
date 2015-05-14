@@ -5,7 +5,7 @@ angular.module('fox', [
     'textAngular',
     'posts',
     'user',
-
+    'pickadate'
 ], function config($httpProvider) {
     $httpProvider.interceptors.push('TokenInterceptor');
 })

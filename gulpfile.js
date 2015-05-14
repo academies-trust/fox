@@ -26,9 +26,16 @@ elixir(function(mix) {
 	mix.copy('vendor/bower_components/textAngular/dist/textAngular.min.js', 'resources/assets/js/vendor/textAngular.js');
 	mix.copy('vendor/bower_components/textAngular/src/textAngular-sanitize.js', 'resources/assets/js/vendor/textAngular-sanitize.js');
 	mix.copy('vendor/bower_components/textAngular/dist/textAngular-rangy.min.js', 'resources/assets/js/vendor/textAngular-rangy.js');
+    mix.copy('vendor/bower_components/ng-pickadate/ng-pickadate.js', 'resources/assets/js/vendor/ng-pickadate.js');
+    mix.copy('vendor/bower_components/pickadate/lib/picker.js', 'resources/assets/js/vendor/picker.js');
+    mix.copy('vendor/bower_components/pickadate/lib/picker.date.js', 'resources/assets/js/vendor/picker.date.js');
+    mix.copy('vendor/bower_components/pickadate/lib/picker.time.js', 'resources/assets/js/vendor/picker.time.js');
 
 	mix.copy('vendor/bower_components/angular-loading-bar/src/loading-bar.css', 'resources/assets/css/vendor/loading-bar.css');
 	mix.copy('vendor/bower_components/textAngular/src/textAngular.css', 'public/assets/css/vendor/textAngular.css');
+    mix.copy('vendor/bower_components/pickadate/lib/themes/default.css', 'public/assets/css/vendor/picker/default.css');
+    mix.copy('vendor/bower_components/pickadate/lib/themes/default.date.css', 'public/assets/css/vendor/picker/default.date.css');
+    mix.copy('vendor/bower_components/pickadate/lib/themes/default.time.css', 'public/assets/css/vendor/picker/default.time.css');
 	mix.scripts([
         "vendor/jquery.js",
         "vendor/angular.js",
@@ -41,13 +48,23 @@ elixir(function(mix) {
         "vendor/angular-http-auth.js",
         "vendor/textAngular.js",
         "vendor/textAngular-sanitize.js",
-        "vendor/textAngular-rangy.js"
+        "vendor/textAngular-rangy.js",
+        "vendor/ng-pickadate.js",
+        "vendor/picker.js",
+        "vendor/picker.date.js",
+        "vendor/picker.time.js",
     ], "public/assets/js", 'resources/assets/js');
 
     mix.styles([
     	"app.css",
-    	"font-awesome.min.css"
+    	"font-awesome.min.css",
     ], 'public/assets/css/app.css');
+
+    mix.styles([
+        "picker/default.css",
+        "picker/default.date.css",
+        "picker/default.time.css",
+    ], 'public/assets/css/vendor/picker.css','public/assets/css/vendor');
 
     mix.version(['assets/css/app.css','assets/js/all.js'])
 });
