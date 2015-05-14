@@ -4,10 +4,9 @@
         <h1>Articles</h1>
         <div ng-repeat="article in ArtCtrl.articles" class="panel panel-default">
             <div class="panel-heading">
-                <strong>[[article.activeContent.data.title]]</strong>
+                <strong>[[article.title]]</strong><small class="pull-right">[[article.updated | date:'fullDate']]</small>
             </div>
-            <div class="panel-body">
-                [[article.activeContent.data.content]]
+            <div class="panel-body" ng-bind-html="article.content">
             </div>
         </div>
     </div>

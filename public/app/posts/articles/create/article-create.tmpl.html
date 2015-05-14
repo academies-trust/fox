@@ -23,7 +23,10 @@
 	                </div>
 	                <div class="form-group">
 	                	<label for="content">Content</label>
-	                	<textarea required class="form-control" id="content" ng-model="newArticle.content"></textarea>
+	                	<text-angular name="content" ng-model="newArticle.content">
+						    <p>Any <b>HTML</b> we put in-between the text-angular tags gets automatically put into the editor if there  <strong style="font-size: 12pt;"><u><em>is not</em></u></strong> a value assigned to the ngModel.</p>
+						    <p>If there is a value assigned to the ngModel, it replaces any html here. To see this, uncomment the line at the bottom of demo.html</p>
+						</text-angular>
 	                </div>
 	                <div class="form-group">
 	                	<label for="published">Publish Date</label>

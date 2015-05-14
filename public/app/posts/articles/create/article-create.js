@@ -1,4 +1,4 @@
-angular.module('articles.create', [])
+angular.module('articles.create', ['textAngular'])
 	.config(function($stateProvider) {
 		$stateProvider
 			.state('fox.articles.create', {
@@ -28,5 +28,7 @@ angular.module('articles.create', [])
 					$state.go('^');
 				});
 	        }
+
+
 		})
 ;

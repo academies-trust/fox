@@ -18,11 +18,11 @@ angular.module('articles', [
 				}
 			})
 	})
-	.controller('ArticlesController', function ArticlesController($stateParams, ArticlesModel, UserModel) {
+	.controller('ArticlesController', function ArticlesController($stateParams, ArticlesModel, UserModel, $sce) {
 		var ArticlesCtrl = this;
 		ArticlesCtrl.getArticles = function() {
 			ArticlesModel.getArticles().then(function(res) {
-				ArticlesCtrl.articles = res.data.data;
+				ArticlesCtrl.articles = ArticlesModel.articles;
 			});
 		}
 		ArticlesCtrl.getArticles();

@@ -7,6 +7,7 @@
     <base href="/"></base>
     <title>TheFoxHub</title>
     <link rel="stylesheet" href="{{ elixir('assets/css/app.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/vendor/textAngular.css') }}">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

@@ -2,6 +2,7 @@ angular.module('fox', [
     'ui.router',
     'angularLocalStorage',
     'http-auth-interceptor',
+    'textAngular',
     'posts',
     'user',
 
@@ -86,4 +87,5 @@ angular.module('fox', [
           }
         }
     })
+
 ;
