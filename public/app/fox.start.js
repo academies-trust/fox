@@ -5,7 +5,8 @@ angular.module('fox', [
     'textAngular',
     'posts',
     'user',
-    'pickadate'
+    'pickadate',
+    'ui.bootstrap',
 ], function config($httpProvider) {
     $httpProvider.interceptors.push('TokenInterceptor');
 })
@@ -22,7 +23,10 @@ angular.module('fox', [
     })
     .controller('ApplicationController', function ApplicationController($scope, storage, UserModel, $rootScope) {
         'use strict';
-        var fox = this;
+        var fox = this,
+            authenticated = false;
+
+        fox.errors = [];
         $scope.currentUser = null;
 
         UserModel.getUser();
@@ -33,15 +37,26 @@ angular.module('fox', [
 
 
         fox.isAuthenticated = function() {
-            return UserModel.isAuthenticated();
+            return fox.authenticated;
         }
 
         fox.handleError = function(response) {
             alert('Error ' + response.data.error.http_code + ' - ' + response.data.error.message + ' (' + response.data.error.code + ')');
-            if(response.data.error.http_code == 401) {
-                storage.remove('user');
-            }
         }
+        fox.hideError = function(index) {
+            fox.errors.splice(index, 1);
+        }
+        $rootScope.$on('event:APIerror', function(error, data) {
+            fox.errors.push(data);
+        })
+        $rootScope.$on('event:auth-loginRequired', function() {
+            fox.authenticated = false;
+            $('body').css('opacity', '1');
+        })
+        $rootScope.$on('event:auth-loginConfirmed', function() {
+            fox.authenticated = true;
+            $('body').css('opacity', '1');
+        })
     })
     .factory('TokenInterceptor', function TokenInterceptor(storage) {
         'use strict';
@@ -58,34 +73,4 @@ angular.module('fox', [
             return config;
         }
     })
-    .directive('authInterceptor', function() {
-        return {
-          restrict: 'C',
-          link: function(scope, elem, attrs) {
-            //once Angular is started, remove class:
-            elem.removeClass('waiting-for-angular');
-            
-            var login = elem.find('#login');
-            var main = elem.find('#main');
-            
-            login.hide();
-            
-            scope.$on('event:auth-loginRequired', function() {
-              login.css('opacity', 0)
-              .slideDown()
-              .animate(
-                { opacity: 1 },
-                { queue: false, duration: 'slow' }
-              );
-                main.hide();
-            });
-            scope.$on('event:auth-loginConfirmed', function() {
-                //
-              main.show();
-              login.slideUp();
-            });
-          }
-        }
-    })
-
 ;

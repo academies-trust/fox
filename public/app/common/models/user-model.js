@@ -1,6 +1,6 @@
 angular.module('fox.models.user', ['http-auth-interceptor'])
 
-	.service('UserModel', function UserModel($http, API_URL, storage, authService, filterFilter){
+	.service('UserModel', function UserModel($http, API_URL, storage, authService, filterFilter, $rootScope){
 		var model = this;
 		model.groups = [];
 		
@@ -12,20 +12,21 @@ angular.module('fox.models.user', ['http-auth-interceptor'])
             				});
             				model.name = res.data.data.name;
             				model.setGroups(res.data.data.groupUsers);
+                            authService.loginConfirmed();
             			});
         }
 
         model.groupTransformer = function(group) {
         	return {
-        			id: group.group.data.id,
-    				name: group.group.data.name,
-    				role: group.permission.data.name,
-    				read: group.permission.data.read,
-    				contribute: group.permission.data.contribute,
-    				write: group.permission.data.write,
-    				admin: group.permission.data.admin,
-    				own: group.permission.data.own,
-        		}
+    			id: group.group.data.id,
+				name: group.group.data.name,
+				role: group.permission.data.name,
+				read: group.permission.data.read,
+				contribute: group.permission.data.contribute,
+				write: group.permission.data.write,
+				admin: group.permission.data.admin,
+				own: group.permission.data.own,
+        	}
         }
 
         model.setGroups = function(groupUsers) {
@@ -38,19 +39,28 @@ angular.module('fox.models.user', ['http-auth-interceptor'])
         }
 
         model.login = function(username, password) {
-            return $http.post(API_URL + '/token', {
-                username: username,
-                password: password
+            return $http({
+                method: 'POST',
+                url: API_URL + '/token',
+                data: {
+                    username: username,
+                    password: password
+                },
+                ignoreAuthModule: true,
             }).then(function (res) {
-            	storage.set('token', res.data.data.token);
-            	authService.loginConfirmed();
-            	model.getUser();
+                storage.set('token', res.data.data.token);
+                model.getUser();
+            }, function(error){
+                if(error.data.error) {
+                    $rootScope.$broadcast('event:APIerror', error);
+                }
             });
         };
 
         model.logout = function() {
         	storage.remove('user');
         	storage.remove('token');
+            $rootScope.$broadcast('event:auth-loginRequired');
         }
 
         model.isAuthenticated = function() {

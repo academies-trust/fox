@@ -1,9 +1,9 @@
 angular.module('fox.models.articles', [
 
 ])
-	.service('ArticlesModel', function ArticlesModel($http, API_URL){
-		var model = this;
-		model.articles = [];
+	.service('ArticlesModel', function ArticlesModel($http, API_URL, $q){
+		var model = this,
+			articles;
 		model.articlesTransformer = function(article) {
 			return {
 				id: article.id,
@@ -14,15 +14,37 @@ angular.module('fox.models.articles', [
 				approved: new Date(article.activeContent.data.approved.date),
 				updated: new Date(article.activeContent.data.updated.date),
 				published: new Date(article.published.date),
+				user: {
+					name: article.activeContent.data.user.data.name,
+					id: article.activeContent.data.user.data.id,
+					email: article.activeContent.data.user.data.email,
+				}
 			}
 		}
-		model.getArticles = function() {
-			return $http.get(API_URL + '/articles').then(function(res) {
-				model.articles = [];
-				$.each(res.data.data, function(index, article) {
-					model.articles.push(model.articlesTransformer(article));
-				});
+		function extract(result) {
+			return result.data.data.map(function(article) {
+				return model.articlesTransformer(article)
 			});
+		}
+		function cacheArticles(result) {
+			articles = extract(result);
+			return articles;
+		}
+		model.getArticles = function(refresh) {
+			return (articles && !refresh) ? $q.when(articles) : $http.get(API_URL + '/articles?include=activeContent.user').then(cacheArticles);
+        }
+        model.findArticle = function(articleId) {
+        	var deferred = $q.defer();
+
+        	if(articles) {
+        		deferred.resolve(/**/);
+        	} else {
+        		model.getArticles().then(function(result) {
+					deferred.resolve();
+				});
+        	}
+
+        	return deferred.promise;
         }
         model.createArticle = function(article) {
         	publishedD = new Date(article.published);

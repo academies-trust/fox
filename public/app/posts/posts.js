@@ -17,7 +17,7 @@ angular.module('posts', [
 		var PostsCtrl = this;
 		PostsCtrl.getArticles = function() {
 			ArticlesModel.getArticles().then(function(res) {
-				PostsCtrl.articles = res.data.data;
+				PostsCtrl.articles = res;
 			});
 		}
 		PostsCtrl.getArticles();

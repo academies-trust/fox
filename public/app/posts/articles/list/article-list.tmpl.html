@@ -2,11 +2,27 @@
     <div class="col-lg-8 col-lg-offset-2">
         <a ui-sref="fox.articles.create"><btn class="btn btn-primary pull-right">Add Article</btn></a>
         <h1>Articles</h1>
-        <div ng-repeat="article in ArtCtrl.articles" class="panel panel-default">
-            <div class="panel-heading">
-                <strong>[[article.title]]</strong><small class="pull-right">[[article.published | date:'fullDate']]</small>
-            </div>
-            <div class="panel-body" ng-bind-html="article.content">
+        <div class="row" ng-repeat="article in ArtCtrl.articles">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>[[article.title]]</strong>
+                        <div class="dropdown pull-right" dropdown is-open="status.isopen">
+                          <div class="dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                            <span class="glyphicon glyphicon-cog"></span>
+                          </div>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="#"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
+                            <li><a href="#"><span class="glyphicon text-danger glyphicon-remove"></span> Delete</a></li>
+                          </ul>
+                        </div>
+                    </div>
+                    <div class="panel-body" ng-bind-html="article.content">
+                    </div>
+                    <div class="panel-footer">
+                        <strong><small>by [[article.user.name]]</small></strong><small class="pull-right">[[article.published | date:'fullDate']]</small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

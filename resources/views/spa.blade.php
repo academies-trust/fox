@@ -17,7 +17,7 @@
     <![endif]-->
 </head>
 
-<body ng-controller="ApplicationController as AppCtrl" class="auth-interceptor waiting-for-angular">
+<body id="body" ng-controller="ApplicationController as AppCtrl">
     <div class="navbar" role="navigation" >
         <div class="container">
             <div class="navbar-header">
@@ -31,10 +31,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a ui-sref="fox" ng-if="AppCtrl.isAuthenticated()">Home</a></li>
-                    <li><a ng-href="#/" ng-if="AppCtrl.isAuthenticated()">My Account</a></li>
+                    <li><a ui-sref="fox.posts" ng-if="AppCtrl.isAuthenticated()">Home</a></li>
+                    <li><a ng-href="fox.user" ng-if="AppCtrl.isAuthenticated()">My Account</a></li>
                     <li><a ng-controller="AuthCtrl as Auth" ng-click="Auth.logout()" ng-if="AppCtrl.isAuthenticated()">Logout</a></li>
                 </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="errors">
+        <div class="row" ng-repeat="(index, error) in AppCtrl.errors">
+            <div class="col-md-6 col-md-offset-3 alert-warning alert" role="alert">
+                <button type="button" class="close" ng-click="AppCtrl.hideError([[index]])" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Error - [[error.data.error.code]] - [[error.data.error.http_code]]</strong>
+                <p>[[error.data.error.message]]</p>
             </div>
         </div>
     </div>
@@ -55,7 +64,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid" ng-if="AppCtrl.isAuthenticated()" id="main">
+    <div class="container-fluid" id="main" ng-if="AppCtrl.isAuthenticated()">
         <div class="row">
             <div class="col-md-12" ui-view="forms">
             </div>

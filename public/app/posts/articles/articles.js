@@ -22,7 +22,7 @@ angular.module('articles', [
 		var ArticlesCtrl = this;
 		ArticlesCtrl.getArticles = function() {
 			ArticlesModel.getArticles().then(function(res) {
-				ArticlesCtrl.articles = ArticlesModel.articles;
+				ArticlesCtrl.articles = res;
 			});
 		}
 		ArticlesCtrl.getArticles();

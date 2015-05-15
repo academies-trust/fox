@@ -5,7 +5,6 @@ angular.module('user.login', [])
 		auth.login = function(credentials) {
             user = UserModel.login(credentials.username, credentials.password).then(function success(response) {
             	$scope.setCurrentUser(user);
-            	authService.loginConfirmed();
             }, function() {
             	// failed
             });
