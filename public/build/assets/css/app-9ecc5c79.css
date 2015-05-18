@@ -6,11 +6,6 @@ html {
 }
 body {
   margin: 0;
-  opacity: 0;
-  transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
 }
 article,
 aside,
@@ -6236,16 +6231,30 @@ label,
 .checkbox label {
   font-weight: 300;
 }
-
-/*# sourceMappingURL=app.css.map */
-html {
-  transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  -webkit-transition: all 0.5s;
+#appLoading,
+#requestLoading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  background: #fff;
 }
-html.waiting-for-angular {
-  opacity: 0;
+#requestLoading {
+  background: rgba(51,122,183,0.5);
+  display: none;
+}
+#appLoading .message,
+#requestLoading .message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  color: #fff;
 }
 /*!
  *  Font Awesome 4.3.0 by @davegandy - http://fontawesome.io - @fontawesome

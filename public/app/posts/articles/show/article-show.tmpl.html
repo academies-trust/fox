@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <h1>Article</h1>
+        <button type="button" class="btn btn-primary" ui-sref="^"><< back to Article list</button>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>[[showArtCtrl.article.title]]</strong>
+                        <div class="dropdown pull-right" dropdown is-open="status.isopen">
+                            <div class="dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                                <span class="glyphicon glyphicon-cog"></span>
+                            </div>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
+                                <li><a href="#"><span class="glyphicon text-danger glyphicon-remove"></span> Delete</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-body" ng-bind-html="showArtCtrl.article.content">
+                    </div>
+                    <div class="panel-footer">
+                        <strong><small>by [[showArtCtrl.article.user.name]]</small></strong><small class="pull-right">[[showArtCtrl.article.published | date:'fullDate']]</small>
+                    </div>
+                </div>
+                <div class="panel panel-default" ng-if="showArtCtrl.article.comments_enabled">
+                	<div class="panel-body">
+                		<div ng-repeat="comment in showArtCtrl.article.comments">
+                			<h5 class="pull-right">[[comment.created]]</h5>
+                			<strong>[[comment.user.name]]:</strong>
+                			<div ng-bind-html="comment.content">
+                			</div>
+                		</div>
+                    </div>
+                    <div class="panel-footer">
+                        <form ng-submit="showArtCtrl.addComment(newComment)">
+						    <text-angular name="content" ng-model="newComment"></text-angular>
+						    <button type="submit" class="btn btn-primary btn-block">Add Comment</button>
+						</form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

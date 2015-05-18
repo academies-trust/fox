@@ -50,9 +50,11 @@ angular.module('fox.models.user', ['http-auth-interceptor'])
             }).then(function (res) {
                 storage.set('token', res.data.data.token);
                 model.getUser();
+                $rootScope.$broadcast('event:loadingComplete')
             }, function(error){
                 if(error.data.error) {
                     $rootScope.$broadcast('event:APIerror', error);
+                    $rootScope.$broadcast('event:loadingComplete');
                 }
             });
         };

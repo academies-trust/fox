@@ -6,21 +6,33 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <strong>[[article.title]]</strong>
+                        <a href ui-sref="fox.articles.show({articleId: article.id})"><strong>[[article.title]]</strong></a>
                         <div class="dropdown pull-right" dropdown is-open="status.isopen">
-                          <div class="dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-                            <span class="glyphicon glyphicon-cog"></span>
-                          </div>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
-                            <li><a href="#"><span class="glyphicon text-danger glyphicon-remove"></span> Delete</a></li>
-                          </ul>
+                            <div class="dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                                <span class="glyphicon glyphicon-cog"></span>
+                            </div>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
+                                <li><a href="#"><span class="glyphicon text-danger glyphicon-remove"></span> Delete</a></li>
+                            </ul>
                         </div>
                     </div>
                     <div class="panel-body" ng-bind-html="article.content">
                     </div>
                     <div class="panel-footer">
                         <strong><small>by [[article.user.name]]</small></strong><small class="pull-right">[[article.published | date:'fullDate']]</small>
+                    </div>
+                </div>
+                <div class="panel panel-default" ng-if="article.comments_enabled">
+                    <table class="table">
+                        <tbody>
+                            <tr ng-repeat="comment in article.comments">
+                                <td>[[comment.content]]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="panel-footer" ui-sref="fox.articles.show({articleId: article.id})">
+                        <button type="button" class="btn btn-link btn-block">Add a comment</button>
                     </div>
                 </div>
             </div>

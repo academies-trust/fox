@@ -18,7 +18,30 @@ angular.module('fox.models.articles', [
 					name: article.activeContent.data.user.data.name,
 					id: article.activeContent.data.user.data.id,
 					email: article.activeContent.data.user.data.email,
-				}
+				},
+				comments: model.commentsTransformer(article.comments.data),
+			}
+		}
+		model.commentsTransformer = function (comments) {
+			var transformedComments = [];
+			$.each(comments, function(index, comment) {
+				transformedComments.push(model.commentTransformer(comment));
+			});
+			return transformedComments;
+		}
+		model.commentTransformer = function (comment) {
+			console.log(comment);
+			return {
+				id: comment.id,
+				content: comment.content,
+				created: new Date(comment.created.date),
+				//published: new Date(comment.published.date),
+				updated: new Date(comment.updated.date),
+				user: {
+					name: comment.user.data.name,
+					id: comment.user.data.id,
+					email: comment.user.data.email,
+				},
 			}
 		}
 		function extract(result) {
@@ -31,30 +54,37 @@ angular.module('fox.models.articles', [
 			return articles;
 		}
 		model.getArticles = function(refresh) {
-			return (articles && !refresh) ? $q.when(articles) : $http.get(API_URL + '/articles?include=activeContent.user').then(cacheArticles);
+			return (articles && !refresh) ? $q.when(articles) : $http.get(API_URL + '/articles?include=activeContent.user,comments.user').then(cacheArticles);
         }
-        model.findArticle = function(articleId) {
+        function findArticle(articleId) {
+        	return _.find(articles, function(article) {
+        		return article.id === parseInt(articleId, 10);
+        	})
+        }
+        model.getArticleById = function(articleId) {
         	var deferred = $q.defer();
-
         	if(articles) {
-        		deferred.resolve(/**/);
+        		deferred.resolve(findArticle(articleId));
         	} else {
-        		model.getArticles().then(function(result) {
-					deferred.resolve();
-				});
+        		model.getArticles().then(function() {
+        				deferred.resolve(findArticle(articleId));
+        			});
         	}
-
         	return deferred.promise;
         }
         model.createArticle = function(article) {
         	publishedD = new Date(article.published);
-        	console.log(publishedD);
         	return $http.post(API_URL + '/groups/'+article.group+'/articles', {
         		title: article.title,
         		content: article.content,
         		comments: article.comments,
         		help: article.help,
         		published: publishedD.getFullYear()+'-'+('0'+(publishedD.getMonth()+1)).slice(-2)+'-'+('0'+publishedD.getDate()).slice(-2),
+        	});
+        }
+        model.addComment = function(article, comment) {
+        	return $http.post(API_URL+'/articles/'+article.id+'/comments', {
+        		content: comment
         	});
         }
 	})

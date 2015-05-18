@@ -40,25 +40,43 @@ angular.module('fox', [
             return fox.authenticated;
         }
 
+        fox.loaded = function() {
+            $('#appLoading').fadeOut();
+        }
+
         fox.handleError = function(response) {
             alert('Error ' + response.data.error.http_code + ' - ' + response.data.error.message + ' (' + response.data.error.code + ')');
         }
         fox.hideError = function(index) {
             fox.errors.splice(index, 1);
         }
+        fox.clearErrors = function() {
+            fox.errors = [];
+        }
         $rootScope.$on('event:APIerror', function(error, data) {
             fox.errors.push(data);
         })
         $rootScope.$on('event:auth-loginRequired', function() {
             fox.authenticated = false;
-            $('body').css('opacity', '1');
+            fox.loaded();
         })
         $rootScope.$on('event:auth-loginConfirmed', function() {
             fox.authenticated = true;
-            $('body').css('opacity', '1');
+            fox.loaded();
+        })
+        $rootScope.$on('event:newAPIcall', function() {
+            fox.clearErrors();
+        })
+        $rootScope.$on('event:loading', function(event, message) {
+            $('#requestLoading .message h1').text(message);
+            $('#requestLoading').fadeIn();
+        })
+        $rootScope.$on('event:loadingComplete', function() {
+            $('#requestLoading').fadeOut();
+            $('#requestLoading .message h1').text('Loading');
         })
     })
-    .factory('TokenInterceptor', function TokenInterceptor(storage) {
+    .factory('TokenInterceptor', function TokenInterceptor(storage, $rootScope) {
         'use strict';
         return {
             request: addToken
@@ -66,6 +84,7 @@ angular.module('fox', [
 
         function addToken(config) {
             var token = storage.get('token');
+            $rootScope.$broadcast('event:newAPIcall');
             if(token) {
                 config.headers = config.headers || {};
                 config.headers.Authorization = 'Bearer ' + token;
