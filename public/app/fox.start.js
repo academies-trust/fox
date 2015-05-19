@@ -10,7 +10,7 @@ angular.module('fox', [
 ], function config($httpProvider) {
     $httpProvider.interceptors.push('TokenInterceptor');
 })
-    .constant('API_URL', 'http://api.fox.dev')
+    .constant('API_URL', 'http://api.thefoxhub.com')
     .config(function($interpolateProvider, $stateProvider, $urlRouterProvider, $locationProvider){
         $locationProvider.html5Mode(true).hashPrefix('!');
         $interpolateProvider.startSymbol('[[').endSymbol(']]');
