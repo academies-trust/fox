@@ -8,10 +8,6 @@ angular.module('articles.create', ['textAngular', 'pickadate'])
 						controller: 'CreateArticleController as createArtCtrl',
 						templateUrl: 'app/posts/articles/create/article-create.tmpl.html'
 					},
-					'posts@' : {
-						controller: 'ArticlesController as ArtCtrl',
-						templateUrl: 'app/posts/articles/list/article-list.tmpl.html'
-					}
 				}
 			})
 		})
