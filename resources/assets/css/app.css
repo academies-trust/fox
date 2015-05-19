@@ -6241,6 +6241,9 @@ label,
   z-index: 9;
   background: #fff;
 }
+#appLoading img {
+  max-width: 100%;
+}
 #requestLoading {
   background: rgba(51,122,183,0.5);
   display: none;
@@ -6248,6 +6251,7 @@ label,
 #appLoading .message,
 #requestLoading .message {
   position: absolute;
+  max-width: 80%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
