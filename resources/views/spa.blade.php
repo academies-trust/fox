@@ -40,7 +40,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#/" id="logo"><img src="{{url('assets/images/foxlogo.png')}}"></a>
+                        <a class="navbar-brand" href ui-sref="fox.posts" id="logo"><img src="{{url('assets/images/foxlogo.png')}}"></a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
