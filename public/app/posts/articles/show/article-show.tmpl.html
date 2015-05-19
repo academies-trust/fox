@@ -33,9 +33,9 @@
                 		</div>
                     </div>
                     <div class="panel-footer">
-                        <form ng-submit="showArtCtrl.addComment(newComment)">
-						    <text-angular name="content" ng-model="newComment"></text-angular>
-						    <button type="submit" class="btn btn-primary btn-block">Add Comment</button>
+                        <form ng-submit="showArtCtrl.addComment(showArtCtrl.newComment)">
+						    <text-angular name="content" ng-model="showArtCtrl.newComment"></text-angular>
+						    <button type="submit" ng-disabled="showArtCtrl.postingComment" class="btn btn-primary btn-block">Add Comment</button>
 						</form>
                     </div>
                 </div>

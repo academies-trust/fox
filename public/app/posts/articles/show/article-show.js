@@ -11,21 +11,37 @@ angular.module('articles.show', ['textAngular'])
 				}
 			})
 		})
-		.controller('ShowArticleController', function showArticleController($stateParams, UserModel, ArticlesModel, filterFilter, $state) {
+		.controller('ShowArticleController', function showArticleController($stateParams, UserModel, ArticlesModel, filterFilter, $state, $scope) {
 			var show = this,
-				article;
+				article,
+				newComment,
+				postingComment = false;
 
-			show.getArticle  = function() {
-				console.log($stateParams.articleId);
-				ArticlesModel.getArticleById($stateParams.articleId).then(function(result) {
-					show.article = result;
-				});
+			show.getArticle  = function(refresh) {
+				if(refresh) {
+					ArticlesModel.getArticleById($stateParams.articleId, refresh).then(function(result) {
+						show.article = result;
+					});
+				} else {
+					ArticlesModel.getArticleById($stateParams.articleId).then(function(result) {
+						show.article = result;
+					});
+				}
 			}
 			show.getArticle();
-			show.addComment = function(comment) {
-				ArticlesModel.addComment(show.article, comment).then(function(res) {
-					console.log(res);
+			show.addComment = function() {
+				show.postingComment = true;
+				show.taDisabled = true;
+				ArticlesModel.addComment(show.article, show.newComment).then(function(res) {
+					show.getArticle('refresh');
+					show.newComment = '';
+				}).finally(function() {
+					show.postingComment = false;
 				});
+			}
+
+			show.clearForm = function() {
+
 			}
 
 		})

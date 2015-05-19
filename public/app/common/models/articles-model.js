@@ -4,7 +4,7 @@ angular.module('fox.models.articles', [
 	.service('ArticlesModel', function ArticlesModel($http, API_URL, $q){
 		var model = this,
 			articles;
-		model.articlesTransformer = function(article) {
+		model.articleTransformer = function(article) {
 			return {
 				id: article.id,
 				comments_enabled: article.comments_enabled,
@@ -30,7 +30,6 @@ angular.module('fox.models.articles', [
 			return transformedComments;
 		}
 		model.commentTransformer = function (comment) {
-			console.log(comment);
 			return {
 				id: comment.id,
 				content: comment.content,
@@ -46,7 +45,7 @@ angular.module('fox.models.articles', [
 		}
 		function extract(result) {
 			return result.data.data.map(function(article) {
-				return model.articlesTransformer(article)
+				return model.articleTransformer(article)
 			});
 		}
 		function cacheArticles(result) {
@@ -61,12 +60,12 @@ angular.module('fox.models.articles', [
         		return article.id === parseInt(articleId, 10);
         	})
         }
-        model.getArticleById = function(articleId) {
+        model.getArticleById = function(articleId, refresh) {
         	var deferred = $q.defer();
-        	if(articles) {
+        	if(articles && !refresh) {
         		deferred.resolve(findArticle(articleId));
         	} else {
-        		model.getArticles().then(function() {
+        		model.getArticles('refresh').then(function() {
         				deferred.resolve(findArticle(articleId));
         			});
         	}
@@ -85,6 +84,10 @@ angular.module('fox.models.articles', [
         model.addComment = function(article, comment) {
         	return $http.post(API_URL+'/articles/'+article.id+'/comments', {
         		content: comment
+        	}).then(function(res) {
+        		return model.getArticleById(res.data.data);
+        	}).catch(function(error) {
+        		return false;
         	});
         }
 	})
