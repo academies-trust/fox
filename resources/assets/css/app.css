@@ -6251,7 +6251,7 @@ label,
 #appLoading .message,
 #requestLoading .message {
   position: absolute;
-  max-width: 80%;
+  max-width: 60%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -6259,4 +6259,7 @@ label,
   -o-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   color: #fff;
+}
+#logo {
+  max-width: 40%;
 }
