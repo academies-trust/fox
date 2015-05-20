@@ -26,7 +26,4 @@ Route::post('gitupdate', function() {
 
 	$ret = shell_exec("cd C:\\inetpub\\wwwroot\\fox-front && composer install");
 	echo "<pre>".$ret."</pre>";
-
-	$ret = shell_exec("cd C:\\inetpub\\wwwroot\\fox-front && php artisan migrate --force");
-	echo "<pre>".$ret."</pre>";
 });
