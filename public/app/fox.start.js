@@ -78,6 +78,9 @@ angular.module('fox', [
             $('#requestLoading .message h1').text('Loading');
         })
     })
+    .controller('NavBarCtrl', function NavBarCtrl($scope) {
+        $scope.isCollapsed = true;
+    })
     .factory('TokenInterceptor', function TokenInterceptor(storage, $rootScope) {
         'use strict';
         return {

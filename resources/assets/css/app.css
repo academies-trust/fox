@@ -6253,7 +6253,9 @@ label,
 #appLoading .message,
 #requestLoading .message {
   position: absolute;
-  max-width: 60%;
+  width: 60%;
+  min-width: 450px;
+  max-width: 95%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -6277,4 +6279,15 @@ label,
   bottom: 0;
   left: 0;
   width: 100%;
+}
+.navbar-default {
+  background: #fff;
+  border: 0;
+}
+.navbar-brand {
+    float: none;
+    height: auto;
+}
+.navbar-brand img {
+  max-width: 450px;
 }
