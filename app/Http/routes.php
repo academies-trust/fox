@@ -18,3 +18,15 @@
 Route::get('/', function () {
     return view('spa');
 });
+
+Route::post('gitupdate', function() {
+	echo "<pre>Doing GIT stuff...</pre>";
+	$ret = shell_exec("cd C:\\inetpub\\wwwroot\\fox-front && git pull origin master");
+	echo "<pre>".$ret."</pre>";
+
+	$ret = shell_exec("cd C:\\inetpub\\wwwroot\\fox-front && composer install");
+	echo "<pre>".$ret."</pre>";
+
+	$ret = shell_exec("cd C:\\inetpub\\wwwroot\\fox-front && php artisan migrate --force");
+	echo "<pre>".$ret."</pre>";
+});

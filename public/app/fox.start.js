@@ -40,10 +40,6 @@ angular.module('fox', [
             return fox.authenticated;
         }
 
-        fox.loaded = function() {
-            $('#appLoading').fadeOut();
-        }
-
         fox.handleError = function(response) {
             alert('Error ' + response.data.error.http_code + ' - ' + response.data.error.message + ' (' + response.data.error.code + ')');
         }
@@ -57,12 +53,18 @@ angular.module('fox', [
             fox.errors.push(data);
         })
         $rootScope.$on('event:auth-loginRequired', function() {
+            $('#appLoading').show();
             fox.authenticated = false;
-            fox.loaded();
+            $('#login').css('opacity', 0)
+              .slideDown('slow')
+              .animate(
+                { opacity: 1 },
+                { queue: false, duration: 'slow' }
+              );
         })
         $rootScope.$on('event:auth-loginConfirmed', function() {
             fox.authenticated = true;
-            fox.loaded();
+            $('#appLoading').fadeOut();
         })
         $rootScope.$on('event:newAPIcall', function() {
             fox.clearErrors();

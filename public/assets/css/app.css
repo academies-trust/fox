@@ -6240,6 +6240,7 @@ label,
   bottom: 0;
   z-index: 9;
   background: #fff;
+  overflow-y: auto;
 }
 #appLoading img {
   max-width: 100%;
@@ -6247,6 +6248,7 @@ label,
 #requestLoading {
   background: rgba(51,122,183,0.5);
   display: none;
+  color: #fff;
 }
 #appLoading .message,
 #requestLoading .message {
@@ -6258,13 +6260,23 @@ label,
   -moz-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
-  color: #fff;
+  max-height: 100%;
+  padding: 5em 0;
 }
 #logo {
-  max-width: 40%;
+  float: none;
 }
 #logo img {
-  max-width: 100%;
+  max-width: 40%;
+}
+#appLoading #login {
+  display: none;
+}
+#errors {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 /*!
  *  Font Awesome 4.3.0 by @davegandy - http://fontawesome.io - @fontawesome

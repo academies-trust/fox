@@ -18,20 +18,42 @@
 </head>
 
 <body id="body" ng-controller="ApplicationController as AppCtrl">
+    <div class="container-fluid" id="errors">
+        <div class="row" ng-repeat="(index, error) in AppCtrl.errors">
+            <div class="col-md-6 col-md-offset-3 alert-warning alert" role="alert">
+                <button type="button" class="close" ng-click="AppCtrl.hideError([[index]])" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Error - [[error.data.error.code]] - [[error.data.error.http_code]]</strong>
+                <p>[[error.data.error.message]]</p>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid" id="appLoading">
         <div class="message">
             <img src="{{url('assets/images/foxlogo.png')}}">
-            <h1>Loading</h1>
+            <div id="login">
+                <h1>Sign In</h1>
+                <form ng-controller="AuthCtrl as Auth" ng-submit="Auth.login(credentials)">
+                    <div class="form-group">
+                        <label>Username or Email </label>
+                        <input type="text" ng-model="credentials.username" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Password </label>
+                        <input type="password" ng-model="credentials.password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="container-fluid" id="requestLoading">
+    <div class="container-fluid" id="requestLoading" ng-hide="AppCtrl.isAuthenticated()">
         <div class="message">
             <h1>Loading</h1>
         </div>
     </div>
     <div class="container-fluid" id="appContent">
         <div class="row">
-            <div class="navbar" role="navigation">
+            <div class="navbar" role="navigation" ng-if="AppCtrl.isAuthenticated()">
                 <div class="container">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -48,33 +70,6 @@
                             <li><a ng-href="fox.user" ng-if="AppCtrl.isAuthenticated()">My Account</a></li>
                             <li><a href ng-controller="AuthCtrl as Auth" ng-click="Auth.logout()" ng-if="AppCtrl.isAuthenticated()">Logout</a></li>
                         </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="container" id="errors">
-                <div class="row" ng-repeat="(index, error) in AppCtrl.errors">
-                    <div class="col-md-6 col-md-offset-3 alert-warning alert" role="alert">
-                        <button type="button" class="close" ng-click="AppCtrl.hideError([[index]])" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>Error - [[error.data.error.code]] - [[error.data.error.http_code]]</strong>
-                        <p>[[error.data.error.message]]</p>
-                    </div>
-                </div>
-            </div>
-            <div class="container" id="login" ng-if="!AppCtrl.isAuthenticated()">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <h1>Sign In</h1>
-                        <form ng-controller="AuthCtrl as Auth" ng-submit="Auth.login(credentials)">
-                            <div class="form-group">
-                                <label>Username or Email </label>
-                                <input type="text" ng-model="credentials.username" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Password </label>
-                                <input type="password" ng-model="credentials.password" class="form-control">
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -108,7 +103,5 @@
     <script src="{{ url('/app/user/profile/user-profile.js') }}"></script>
     <script src="{{ url('/app/user/login/user-login.js') }}"></script>
     <script src="{{ url('/app/common/models/user-model.js') }}"></script>
-    <script src="{{ url('/app/controllers.js') }}"></script>
-    <script src="{{ url('/app/services.js') }}"></script>
 </body>
 </html>
