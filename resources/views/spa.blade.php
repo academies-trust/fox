@@ -62,7 +62,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="#">
+                  <a class="navbar-brand" href ui-sref="fox.posts">
                     <img src="{{url('assets/images/foxlogo.png')}}">
                   </a>
                 </div>

@@ -1,17 +1,40 @@
 <div class="row">
     <div class="col-lg-8 col-lg-offset-2">
-        <a ui-sref="fox.articles"><btn class="btn btn-default pull-right">Cancel</btn></a>
+    	<div class="row">
+        	<a ui-sref="fox.articles"><btn class="btn btn-default pull-right">Cancel</btn></a>
+        </div>
+        <div class="row">
+        	<div class="col-md-8 col-md-offset-2">
+	        	<div class="panel panel-default">
+	        		<div class="panel-heading">
+	        			Revision Control
+	        		</div>
+	        		<div class="panel-body">
+	        			<form ng-submit="editArtCtrl.changeRevision(editArtCtrl.currentRevision)">
+			        		<div class="form-group">
+			                	<label for="revision">Revision</label>
+			            		<select id="revision" ng-model="editArtCtrl.revisionSelect" ng-init="editArtCtrl.revisionSelect = editArtCtrl.revisionSelect" ng-change="editArtCtrl.selectRevision(editArtCtrl.revisionSelect)" class="form-control">
+				            		<option ng-repeat="revision in editArtCtrl.article.revisions | orderBy:'created':true" value="[[revision.id]]">[[revision.created | date:'dd/MM/yyyy @ h:mma']] - by [[revision.user.name]]</option>
+				            	</select>
+			            	</div>
+			            	[[editArtCtrl.revisionSelect]]
+			            	<button type="submit" class="btn btn-default btn-block">Publish this Revision</button>
+			            </form>
+		            </div>
+	        	</div>
+	        </div>
+        </div>
         <h1>Edit Article</h1>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong>Article Details</strong>
+                
             </div>
             <div class="panel-body">
             	<form ng-submit="editArtCtrl.edit(editArtCtrl.article)">
 	                <div class="form-group">
 	                	<label for="client">Group</label>
-	                	<select ng-init="editArtCtrl.article.group = null" required class="form-control" id="client" ng-model="editArtCtrl.article.group.id">
-	                		<option selected value="null">-- Please Select -- </option>
+	                	<select required class="form-control" id="client" ng-model="editArtCtrl.article.group">
+	                		<option value="null">-- Please Select -- </option>
 	                		<option ng-repeat="group in editArtCtrl.getGroupsWhereCan('write')" value="[[group.id]]">
 	                			[[group.name]]
 	                		</option>
@@ -19,11 +42,15 @@
 	                </div>
 	                <div class="form-group">
 	                	<label for="title">Title</label>
-	                	<input type="text" required class="form-control" id="title" maxlength="255" ng-model="editArtCtrl.article.title">
+	                	<input type="text" required class="form-control" id="title" maxlength="255" ng-model="editArtCtrl.currentRevision.title">
 	                </div>
 	                <div class="form-group">
 	                	<label for="content">Content</label>
-	                	<text-angular name="content" ng-model="editArtCtrl.article.content"></text-angular>
+	                	<text-angular name="content" ng-model="editArtCtrl.currentRevision.content"></text-angular>
+	                </div>
+	                <div class="form-group">
+	                	<label for="reason">Reason for Edit</label>
+	                	<input type="text" required class="form-control" id="reason" maxlength="255" ng-model="editArtCtrl.currentRevision.reason" placeholder="A simple reason or explanation of your edit">
 	                </div>
 	                <div class="form-group">
 	                	<label for="published">Publish Date</label>
@@ -31,7 +58,7 @@
 	                </div>
 	                <div class="checkbox">
 	                	<label for="comments">
-		                	<input type="checkbox" value="1" id="comments" ng-model="editArtCtrl.article.comments">
+		                	<input type="checkbox" value="1" id="comments" ng-model="editArtCtrl.article.comments_enabled">
 		                	Allow Comments
 	                	</label>
 	                </div>
@@ -41,7 +68,7 @@
 	                		Add to Help
 	                	</label>
 	                </div>
-	                <input type="submit" class="btn btn-primary btn-block" value="Create">
+	                <input type="submit" class="btn btn-primary btn-block" value="Save">
 	            </form>
             </div>
 	    </div>

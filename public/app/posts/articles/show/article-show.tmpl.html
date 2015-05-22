@@ -12,8 +12,8 @@
                                 <span class="glyphicon glyphicon-cog"></span>
                             </div>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
-                                <li><a href="#"><span class="glyphicon text-danger glyphicon-remove"></span> Delete</a></li>
+                                <li><a href ui-sref="fox.articles.edit({articleId:showArtCtrl.article.id})"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
+                                <li><a href ng-click="ArtCtrl.deleteArticle(showArtCtrl.article.id)"><span class="glyphicon text-danger glyphicon-remove"></span> Delete</a></li>
                             </ul>
                         </div>
                     </div>
