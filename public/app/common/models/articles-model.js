@@ -1,7 +1,7 @@
 angular.module('fox.models.articles', [
 
 ])
-	.service('ArticlesModel', function ArticlesModel($http, API_URL, $q){
+	.service('ArticlesModel', function ArticlesModel($http, API_URL, $q, $filter){
 		var model = this,
 			articles;
 		model.articleTransformer = function(article) {
@@ -61,18 +61,21 @@ angular.module('fox.models.articles', [
 		}
 		model.revisionTransformer = function (revision) {
 			approved_by = (revision.approved_by) ? {
-						id: revision.approvedBy.data.id,
+						id: parseInt(revision.approvedBy.data.id,10),
 						name: revision.approvedBy.data.name,
 						email: revision.approvedBy.data.email,
 					} : null;
+			created = new Date(revision.created.date);
+			created_formatted = $filter('date')(created, 'dd/MM/yyyy @ h:mma');
 			return {
-				id: revision.id,
+				id: parseInt(revision.id,10),
 				content: revision.content,
 				title: revision.title,
 				reason: revision.reason,
 				approved: new Date(revision.approved.date),
 				approved_by: approved_by,
-				created: new Date(revision.created.date),
+				created: created,
+				created_formatted: created_formatted,
 				//published: new Date(revision.published.date),
 				updated: new Date(revision.updated.date),
 				user: {
@@ -115,7 +118,7 @@ angular.module('fox.models.articles', [
         	return $http.post(API_URL + '/groups/'+article.group+'/articles', {
         		title: article.title,
         		content: article.content,
-        		comments: article.comments,
+        		comments: article.comments || 0,
         		help: article.help,
         		published: publishedD.getFullYear()+'-'+('0'+(publishedD.getMonth()+1)).slice(-2)+'-'+('0'+publishedD.getDate()).slice(-2),
         	});

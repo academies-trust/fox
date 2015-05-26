@@ -19,8 +19,9 @@ angular.module('articles.edit', ['textAngular', 'pickadate'])
 				article,
 				newComment,
 				postingComment = false,
-				revisionSelect,
 				currentRevision;
+
+			$scope.revisionSelect;
 
 			edit.getGroupsWhereCan = function(permission)	{
 				return UserModel.getGroupsWhereCan(permission);
@@ -29,7 +30,7 @@ angular.module('articles.edit', ['textAngular', 'pickadate'])
 			edit.getArticle  = function(refresh) {
 				ArticlesModel.getArticleById($stateParams.articleId, 'refresh').then(function(result) {
 					edit.article = result;
-					edit.revisionSelect = result.content_id;
+					$scope.revisionSelect = parseInt(result.content_id,10);
 					edit.currentRevision = result;
 				});
 			}
