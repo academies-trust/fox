@@ -13,11 +13,10 @@
 	        			<form ng-submit="editArtCtrl.changeRevision(editArtCtrl.currentRevision)">
 			        		<div class="form-group">
 			                	<label for="revision">Revision</label>
-			            		<select id="revision" ng-model="editArtCtrl.revisionSelect" ng-init="editArtCtrl.revisionSelect = editArtCtrl.revisionSelect" ng-change="editArtCtrl.selectRevision(editArtCtrl.revisionSelect)" class="form-control">
-				            		<option ng-repeat="revision in editArtCtrl.article.revisions | orderBy:'created':true" value="[[revision.id]]">[[revision.created | date:'dd/MM/yyyy @ h:mma']] - by [[revision.user.name]]</option>
+			            		<select id="revision" ng-model="editArtCtrl.revisionSelect" ng-change="editArtCtrl.selectRevision(editArtCtrl.revisionSelect)" class="form-control">
+				            		<option ng-repeat="revision in editArtCtrl.article.revisions | orderBy:'created':true" value="[[revision.id]]">[[revision.created | date:'dd/MM/yyyy @ h:mma']] - [[revision.reason]] - [[revision.user.name]]</option>
 				            	</select>
 			            	</div>
-			            	[[editArtCtrl.revisionSelect]]
 			            	<button type="submit" class="btn btn-default btn-block">Publish this Revision</button>
 			            </form>
 		            </div>

@@ -69,6 +69,7 @@ angular.module('fox.models.articles', [
 				id: revision.id,
 				content: revision.content,
 				title: revision.title,
+				reason: revision.reason,
 				approved: new Date(revision.approved.date),
 				approved_by: approved_by,
 				created: new Date(revision.created.date),

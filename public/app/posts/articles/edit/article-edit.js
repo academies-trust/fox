@@ -49,7 +49,9 @@ angular.module('articles.edit', ['textAngular', 'pickadate'])
 	        edit.changeRevision = function() {
 	        	ArticlesModel.changeRevision(edit.article,edit.currentRevision.id)
 	        	.then(function(result) {
-	        		$state.go('fox.articles.show', {articleId: edit.article.id});
+	        		ArticlesModel.getArticles('refresh').then(function() {
+	        			$state.go('fox.articles.show', {articleId: edit.article.id});
+	        		});
 	        	});
 	        }
 
