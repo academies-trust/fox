@@ -11,34 +11,28 @@ angular.module('articles.edit', ['textAngular', 'pickadate'])
 					'posts@' : {
 
 					}
-				}
+				},
+				resolve: {
+                    article: function(ArticlesModel, $stateParams) {
+                        return ArticlesModel.getArticleById($stateParams.articleId, true);
+                    }
+                }
 			})
 		})
-		.controller('EditArticleController', function editArticleController($stateParams, UserModel, ArticlesModel, filterFilter, $state, $scope, $filter) {
-			var edit = this,
-				article,
-				newComment,
-				postingComment = false,
-				currentRevision;
-
-			$scope.revisionSelect;
+		.controller('EditArticleController', function editArticleController($stateParams, UserModel, ArticlesModel, filterFilter, $state, $scope, $filter, article) {
+			var edit = this;
+			edit.article = article;
+			$scope.revisionSelect = parseInt(edit.article.content_id, 10);
+			edit.currentRevision = article;
 
 			edit.getGroupsWhereCan = function(permission)	{
 				return UserModel.getGroupsWhereCan(permission);
 			}
 
-			edit.getArticle  = function(refresh) {
-				ArticlesModel.getArticleById($stateParams.articleId, 'refresh').then(function(result) {
-					edit.article = result;
-					$scope.revisionSelect = parseInt(result.content_id,10);
-					edit.currentRevision = result;
-				});
-			}
 			edit.selectRevision = function(id) {
 				revision = $filter('filter')(edit.article.revisions, {id: id})[0];
 				edit.currentRevision = revision;
 			}
-			edit.getArticle();
 
 			edit.edit = function(article) {
 	            ArticlesModel.editArticle(article)
@@ -50,9 +44,7 @@ angular.module('articles.edit', ['textAngular', 'pickadate'])
 	        edit.changeRevision = function() {
 	        	ArticlesModel.changeRevision(edit.article,edit.currentRevision.id)
 	        	.then(function(result) {
-	        		ArticlesModel.getArticles('refresh').then(function() {
-	        			$state.go('fox.articles.show', {articleId: edit.article.id});
-	        		});
+	        		$state.go('fox.articles.show', {articleId: edit.article.id});
 	        	});
 	        }
 

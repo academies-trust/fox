@@ -21,7 +21,7 @@ angular.module('articles.create', ['textAngular', 'pickadate'])
 			create.create = function(article) {
 	            ArticlesModel.createArticle(article)
 				.then(function(result) {
-					$state.go('^');
+					$state.go('^', {}, { reload: true });
 				});
 	        }
 

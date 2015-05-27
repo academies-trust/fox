@@ -15,17 +15,17 @@ angular.module('articles', [
 						controller: 'ArticlesController as ArtCtrl',
 						templateUrl: 'app/posts/articles/list/article-list.tmpl.html'
 					},
-				}
+				},
+				resolve: {
+                    articles: function(ArticlesModel) {
+                        return ArticlesModel.getArticles(true);
+                    }
+                }
 			})
 	})
-	.controller('ArticlesController', function ArticlesController($stateParams, ArticlesModel, UserModel) {
+	.controller('ArticlesController', function ArticlesController($stateParams, ArticlesModel, UserModel, articles) {
 		var ArticlesCtrl = this;
-		ArticlesCtrl.getArticles = function() {
-			ArticlesModel.getArticles().then(function(res) {
-				ArticlesCtrl.articles = res;
-			});
-		}
-		ArticlesCtrl.getArticles();
+		ArticlesCtrl.articles = articles;
 	})
 
 ;
