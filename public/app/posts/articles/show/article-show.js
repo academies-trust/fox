@@ -2,7 +2,7 @@ angular.module('articles.show', ['textAngular'])
 	.config(function($stateProvider) {
 		$stateProvider
 			.state('fox.articles.show', {
-				url: '/articles/:articleId/show',
+				url: '/:articleId/show',
 				views: {
 					'posts@': {
 						controller: 'ShowArticleController as showArtCtrl',

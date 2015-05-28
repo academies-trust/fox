@@ -69,6 +69,28 @@
         </div>
     </div>
     <div class="container-fluid" id="appContent">
+        <div class="row" id="primaryNav">
+            <div class="col-md-4 col-lg-3" id="currentGroup">
+                <div ng-click="AppCtrl.toggleGroupSelect()">
+                    <span class="glyphicon glyphicon-list" ng-hide="AppCtrl.groupSelect"></span> 
+                    <span class="glyphicon glyphicon-remove" ng-show="AppCtrl.groupSelect"></span> 
+                    <span ng-bind="AppCtrl.currentGroup.name"></span>
+                </div>
+                <nav class="groups" ng-show="AppCtrl.groupSelect">
+                    <ul>
+                        <li ng-click="AppCtrl.changeGroup('all')">All Groups</li>
+                        <li ng-repeat="group in AppCtrl.getGroupsWhereCan('read')" ng-click="AppCtrl.changeGroup(group.id)">[[group.name]]</li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-md-8 col-lg-9">
+                <nav class="modules">
+                    <ul>
+                        <li ng-repeat="modules in AppCtrl.modules" ui-sref="">[[module.name]]</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
         <div class="row">
             <nav class="navbar navbar-default" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -101,9 +123,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3" ui-view="groups">
-                    </div>
-                    <div class="col-md-9" ui-view="posts">
+                    <div class="col-md-12" ui-view="posts">
                     </div>
                 </div>
             </div>   
@@ -122,8 +142,11 @@
     <script src="{{ url('/app/posts/articles/edit/article-edit.js') }}"></script>
     <script src="{{ url('/app/common/models/articles-model.js') }}"></script>
     <script src="{{ url('/app/user/user.js') }}"></script>
+    <script src="{{ url('/app/groups/groups.js') }}"></script>
     <script src="{{ url('/app/user/profile/user-profile.js') }}"></script>
     <script src="{{ url('/app/user/login/user-login.js') }}"></script>
     <script src="{{ url('/app/common/models/user-model.js') }}"></script>
+    <script src="{{ url('/app/common/models/groups-model.js') }}"></script>
+
 </body>
 </html>

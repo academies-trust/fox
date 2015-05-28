@@ -86,16 +86,28 @@ angular.module('fox.models.articles', [
 			}
 		}
 		function extract(result) {
-			return result.data.data.map(function(article) {
+			return result.data.map(function(article) {
 				return model.articleTransformer(article)
 			});
+		}
+		function groupExtract(result) {
+			articles = result.data.articles;
+			return articles;
 		}
 		function cacheArticles(result) {
 			articles = extract(result);
 			return articles;
 		}
-		model.getArticles = function(refresh) {
-			return (articles && !refresh) ? $q.when(articles) : $http.get(API_URL + '/articles?include=activeContent.user,activeContent.approvedBy,revisions.user,revisions.approvedBy,comments.user').then(cacheArticles);
+		model.getArticles = function(group, refresh) {
+			if(group) {
+				return (articles && !refresh) ? $q.when(articles) : $http.get(API_URL + '/groups/'+group+'?include=articles.activeContent.user,articles.activeContent.approvedBy,articles.revisions.user,articles.revisions.approvedBy,articles.comments.user').then(function(result) {
+					return cacheArticles(groupExtract(result.data));
+				});
+			} else {
+				return (articles && !refresh) ? $q.when(articles) : $http.get(API_URL + '/articles?include=activeContent.user,activeContent.approvedBy,revisions.user,revisions.approvedBy,comments.user').then(function(result) {
+					return cacheArticles(result.data);
+				});
+			}
         }
         function findArticle(articleId) {
         	return _.find(articles, function(article) {

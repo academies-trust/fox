@@ -5,6 +5,7 @@ angular.module('fox', [
     'textAngular',
     'posts',
     'user',
+    'groups',
     'pickadate',
     'ui.bootstrap',
 ], function config($httpProvider) {
@@ -17,20 +18,34 @@ angular.module('fox', [
         $interpolateProvider.startSymbol('[[').endSymbol(']]');
         $stateProvider
             .state('fox', {
-                url: '',
-                abstract: true
+                url: '/:groupId',
+                views: {
+                    'posts@': {
+                        controller: 'ApplicationController as AppCtrl',
+                        templateUrl: 'app/posts/articles/list/article-list.tmpl.html',
+                    },
+                },
+                resolve: {
+                    groupId: function($stateParams, GroupsModel){
+                        return GroupsModel.setGroup($stateParams.groupId).id;
+                    }
+                }
             });
-            $urlRouterProvider.otherwise('/');
+            $urlRouterProvider.otherwise('/all');
     })
-    .controller('ApplicationController', function ApplicationController($scope, storage, UserModel, $rootScope) {
+    .controller('ApplicationController', function ApplicationController($scope, storage, UserModel, $rootScope, $state, GroupsModel, $stateParams) {
         'use strict';
         var fox = this,
             authenticated = false;
 
         fox.errors = [];
+        fox.currentGroup;
+        fox.groupSelect = false;
         $scope.currentUser = null;
 
-        UserModel.getUser();
+        UserModel.getUser().then(function() {
+            fox.getGroup();
+        });
 
         $scope.setCurrentUser = function (user) {
             $scope.currentUser = user;
@@ -50,6 +65,32 @@ angular.module('fox', [
         fox.clearErrors = function() {
             fox.errors = [];
         }
+        fox.setGroup = function(groupId) {
+            fox.currentGroup = GroupsModel.setGroup(groupId);
+            return fox.currentGroup;
+        }
+
+        fox.setGroup($stateParams.groupId);
+
+        fox.getGroup = function() {
+            fox.currentGroup = GroupsModel.getGroup();
+            return fox.currentGroup;
+        }
+
+        fox.toggleGroupSelect = function() {
+            fox.groupSelect = (fox.groupSelect) ? false : true;
+        }
+
+        fox.getGroupsWhereCan = function(permission)  {
+            return UserModel.getGroupsWhereCan(permission);
+        }
+
+        fox.changeGroup = function(groupId) {
+            fox.setGroup(groupId);
+            $state.go('.',{ groupId: groupId });
+            fox.groupSelect = false;
+        }
+
         $rootScope.$on('event:APIerror', function(error, data) {
             fox.errors.push(data);
         })

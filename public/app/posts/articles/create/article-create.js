@@ -2,7 +2,7 @@ angular.module('articles.create', ['textAngular', 'pickadate'])
 	.config(function($stateProvider) {
 		$stateProvider
 			.state('fox.articles.create', {
-				url: '/articles/create',
+				url: '/create',
 				views: {
 					'forms@': {
 						controller: 'CreateArticleController as createArtCtrl',

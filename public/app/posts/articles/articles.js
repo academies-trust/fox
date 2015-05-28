@@ -17,8 +17,8 @@ angular.module('articles', [
 					},
 				},
 				resolve: {
-                    articles: function(ArticlesModel) {
-                        return ArticlesModel.getArticles(true);
+                    articles: function(ArticlesModel, GroupsModel) {
+                        return ArticlesModel.getArticles(GroupsModel.getGroupId(), true);
                     }
                 }
 			})

@@ -2,7 +2,7 @@ angular.module('articles.edit', ['textAngular', 'pickadate'])
 	.config(function($stateProvider) {
 		$stateProvider
 			.state('fox.articles.edit', {
-				url: '/articles/:articleId/edit',
+				url: '/:articleId/edit',
 				views: {
 					'forms@': {
 						controller: 'EditArticleController as editArtCtrl',

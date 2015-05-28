@@ -867,6 +867,40 @@ th {
 .glyphicon-tree-deciduous:before {
   content: "\e200";
 }
+@font-face {
+    font-family: 'open_sans';
+    src: url('/assets/fonts/OpenSans-Bold-webfont.eot');
+    src: url('/assets/fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/OpenSans-Bold-webfont.woff') format('woff'),
+         url('/assets/fonts/OpenSans-Bold-webfont.ttf') format('truetype'),
+         url('/assets/fonts/OpenSans-Bold-webfont.svg#open_sansbold') format('svg');
+    font-weight: bolder;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+}
+@font-face {
+    font-family: 'open_sans';
+    src: url('/assets/fonts/OpenSans-Regular-webfont.eot');
+    src: url('/assets/fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/OpenSans-Regular-webfont.woff') format('woff'),
+         url('/assets/fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('/assets/fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+}
+
+@font-face {
+    font-family: 'open_sans';
+    src: url('/assets/fonts/OpenSans-Italic-webfont.eot');
+    src: url('/assets/fonts/OpenSans-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/OpenSans-Italic-webfont.woff') format('woff'),
+         url('/assets/fonts/OpenSans-Italic-webfont.ttf') format('truetype'),
+         url('/assets/fonts/OpenSans-Italic-webfont.svg#open_sansitalic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+    text-rendering: optimizeLegibility;
+}
 * {
   box-sizing: border-box;
 }
@@ -879,7 +913,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-family: "open_sans", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -6295,6 +6329,50 @@ label,
 .form-control.picker__input {
   cursor: default;
   background-color: #fff;
+}
+#primaryNav {
+  position: fixed;
+  bottom: 0;
+  left: 15px;
+  right: 15px;
+  z-index: 2;
+  background: #3498db;
+  color: #fff;
+  font-size: 1.5em;
+  line-height: 3em;
+}
+#currentGroup {
+  background: #2980b9;
+  cursor: pointer;
+}
+#currentGroup .glyphicon {
+  font-size: 1.6rem;
+  margin-right: 1em;
+} 
+nav.groups {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background: #2980b9;
+  color: #fff;
+  font-size: 1.7rem;
+}
+nav.groups ul {
+  padding: 0;
+  margin: 15px 0;
+}
+nav.groups li {
+  cursor: pointer;
+  list-style-type: none;
+  line-height: 2.3em;
+  padding: 0 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+nav.groups li:hover {
+  font-weight: bold;
 }
 /*!
  *  Font Awesome 4.3.0 by @davegandy - http://fontawesome.io - @fontawesome

@@ -31,7 +31,6 @@ angular.module('fox.models.user', ['http-auth-interceptor'])
 
         model.setGroups = function(groupUsers) {
         	model.groups = [];
-        	//console.log(groupUsers);
         	$.each(groupUsers.data, function(index, groupUser)
         	{
         		model.groups.push(model.groupTransformer(groupUser));
@@ -86,8 +85,20 @@ angular.module('fox.models.user', ['http-auth-interceptor'])
 						groups = filterFilter(model.groups, {admin: true});
 					break;
 				}
-			return groups;
+            if(groups) {
+                return groups;
+            } else {
+                return false;
+            }
 		}
+        model.hasGroup = function(groupId) {
+            group = filterFilter(model.groups, {id: groupId});
+            if(group.length === 1) {
+                return group;
+            } else {
+                return false;
+            }
+        }
 	})
 
 ;
