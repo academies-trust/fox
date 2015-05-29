@@ -1,40 +1,25 @@
-<div class="row">
-    <div class="col-lg-8 col-lg-offset-2">
-        <a ui-sref="fox.articles.create"><btn class="btn btn-primary pull-right">Add Article</btn></a>
-        <h1>Articles</h1>
-        <div class="row" ng-repeat="article in ArtCtrl.articles">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <a href ui-sref="fox.articles.show({articleId: article.id})"><strong>[[article.title]]</strong></a>
-                        <div class="dropdown pull-right" dropdown is-open="status.isopen">
-                            <div class="dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-                                <span class="glyphicon glyphicon-cog"></span>
-                            </div>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href ui-sref="fox.articles.edit({articleId:article.id})"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
-                                <li><a href ng-click="ArtCtrl.deleteArticle(article.id)"><span class="glyphicon text-danger glyphicon-remove"></span> Delete</a></li>
-                            </ul>
+<div class="row" ng-repeat="article in ArtCtrl.articles">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href ui-sref="fox.articles.show({articleId: article.id})"><strong class="h3">[[article.title]]</strong></a>
+            </div>
+            <div class="panel-body" ng-bind-html="article.content">
+            </div>
+            <div class="panel-footer">
+                <strong><small>by [[article.user.name]]</small></strong><small class="pull-right">[[article.published | date:'fullDate']]</small>
+            </div>
+            <div ng-if="article.comments_enabled">
+                <div class="panel-body" ng-if="article.comments[0]">
+                    <div ng-repeat="comment in article.comments">
+                        <h5 class="pull-right">[[comment.created]]</h5>
+                        <strong>[[comment.user.name]]:</strong>
+                        <div ng-bind-html="comment.content">
                         </div>
                     </div>
-                    <div class="panel-body" ng-bind-html="article.content">
-                    </div>
-                    <div class="panel-footer">
-                        <strong><small>by [[article.user.name]]</small></strong><small class="pull-right">[[article.published | date:'fullDate']]</small>
-                    </div>
-                    <div ng-if="article.comments_enabled">
-                        <div class="panel-body" ng-if="article.comments[0]">
-                            <div ng-repeat="comment in article.comments">
-                                <h5 class="pull-right">[[comment.created]]</h5>
-                                <strong>[[comment.user.name]]:</strong>
-                                <div ng-bind-html="comment.content">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-footer" ui-sref="fox.articles.show({articleId: article.id})">
-                            <button type="button" class="btn btn-link btn-block">Add a comment</button>
-                        </div>
-                    </div>
+                </div>
+                <div class="panel-footer" ui-sref="fox.articles.show({articleId: article.id})">
+                    <button type="button" class="btn btn-link btn-block">Add a comment</button>
                 </div>
             </div>
         </div>

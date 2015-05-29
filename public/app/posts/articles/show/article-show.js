@@ -8,17 +8,22 @@ angular.module('articles.show', ['textAngular'])
 						controller: 'ShowArticleController as showArtCtrl',
 						templateUrl: 'app/posts/articles/show/article-show.tmpl.html'
 					},
+					'actions@': {
+						controller: 'ShowArticleController as showArtCtrl',
+						templateUrl: 'app/posts/articles/show/article-show-actions.tmpl.html'
+					}
 				},
 				resolve: {
-                    article: function(ArticlesModel, $stateParams) {
-                        return ArticlesModel.getArticleById($stateParams.articleId, true);
+                    articles: function(ArticlesModel, $stateParams) {
+                        return ArticlesModel.getArticleById($stateParams.articleId);
                     }
                 }
 			})
 	})
-	.controller('ShowArticleController', function showArticleController($stateParams, UserModel, ArticlesModel, filterFilter, $state, $scope, article) {
+	.controller('ShowArticleController', function ShowArticleController($stateParams, UserModel, ArticlesModel, $state, articles) {
+		console.log(articles);
 		var show = this;
-		show.article = article;
+		show.article = articles;
 		var newComment,
 			postingComment = false;
 

@@ -68,7 +68,17 @@
             <h1>Loading</h1>
         </div>
     </div>
-    <div class="container-fluid" id="appContent">
+    <div class="container-fluid" id="fixedNav">
+        <div class="row" id="secondaryNav">
+            <div class="container">
+                <div class="row">
+                    <nav class="actions text-center">
+                        <ul ui-view="actions">
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
         <div class="row" id="primaryNav">
             <div class="col-md-4 col-lg-3" id="currentGroup">
                 <div ng-click="AppCtrl.toggleGroupSelect()">
@@ -92,6 +102,8 @@
                 </nav>
             </div>
         </div>
+    </div>
+    <div class="container-fluid" id="appContent">
         <div class="row">
             <nav class="navbar navbar-default" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -118,7 +130,7 @@
             </nav>
         </div>
         <div class="row">
-            <div class="container-fluid" id="main" ng-if="AppCtrl.isAuthenticated()">
+            <div class="container" id="main" ng-if="AppCtrl.isAuthenticated()">
                 <div class="row">
                     <div class="col-md-12" ui-view="forms">
                     </div>

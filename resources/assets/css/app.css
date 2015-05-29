@@ -6330,16 +6330,30 @@ label,
   cursor: default;
   background-color: #fff;
 }
-#primaryNav {
+#fixedNav {
   position: fixed;
   bottom: 0;
-  left: 15px;
-  right: 15px;
+  left: 0px;
+  right: 0px;
   z-index: 2;
-  background: #34495e;
   color: #fff;
   font-size: 1.5em;
   line-height: 3em;
+}
+#primaryNav {
+  background: #34495e;
+}
+.actions li {
+  background: #2980b9;
+}
+.actions li.negative {
+  background: #c0392b;
+}
+.actions li.positive {
+  background: #27ae60;
+}
+.actions li.minor {
+  background: #95a5a6;
 }
 #currentGroup {
   background: #2c3e50;
@@ -6379,15 +6393,17 @@ nav.groups li {
 nav.groups li:hover {
   font-weight: bold;
 }
-nav.modules ul {
+#fixedNav ul {
   padding: 0;
   margin: 0;
 }
-nav.modules li {
+#fixedNav li {
   list-style-type: none;
   display: inline-block;
   padding: 0 1em;
   cursor: pointer;
+}
+nav.modules li {
   opacity: 0.8
 }
 nav.modules li.active {
@@ -6397,6 +6413,26 @@ nav.modules li.active {
 nav.modules li:hover {
   opacity: 1;
 }
-nav.modules li span.glyphicon {
+#fixedNav li span.glyphicon {
   margin-right: 0.5em;
+}
+.panel-default .panel-heading {
+  color: #fff;
+  background: #2980b9;
+  border: 0;
+  border-radius: 0;
+}
+.panel-heading a,
+.panel-heading a:hover {
+  color: #fff;
+}
+.panel-heading .h3 {
+  line-height: 1.8em;
+}
+.panel-footer {
+  border: 0;
+}
+.panel-default {
+  border-radius: 0;
+  border: 1px solid #ddd;
 }

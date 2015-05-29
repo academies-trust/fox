@@ -114,16 +114,10 @@ angular.module('fox.models.articles', [
         		return article.id === parseInt(articleId, 10);
         	})
         }
-        model.getArticleById = function(articleId, refresh) {
-        	var deferred = $q.defer();
-        	if(articles && !refresh) {
-        		deferred.resolve(findArticle(articleId));
-        	} else {
-    			model.getArticles('refresh').then(function() {
-    				deferred.resolve(findArticle(articleId));
-    			});
-        	}
-        	return deferred.promise;
+        model.getArticleById = function(articleId) {
+        	return $http.get(API_URL + '/articles/'+articleId+'?include=activeContent.user,activeContent.approvedBy,revisions.user,revisions.approvedBy,comments.user').then(function(result) {
+        		return model.articleTransformer(result.data.data);
+        	});
         }
         model.createArticle = function(article) {
         	publishedD = new Date(article.published);
