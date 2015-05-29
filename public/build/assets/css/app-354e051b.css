@@ -6336,14 +6336,19 @@ label,
   left: 15px;
   right: 15px;
   z-index: 2;
-  background: #3498db;
+  background: #34495e;
   color: #fff;
   font-size: 1.5em;
   line-height: 3em;
 }
 #currentGroup {
-  background: #2980b9;
+  background: #2c3e50;
   cursor: pointer;
+}
+#currentGroup > div {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 #currentGroup .glyphicon {
   font-size: 1.6rem;
@@ -6354,7 +6359,7 @@ nav.groups {
   bottom: 100%;
   left: 0;
   right: 0;
-  background: #2980b9;
+  background: #2c3e50;
   color: #fff;
   font-size: 1.7rem;
 }
@@ -6366,13 +6371,34 @@ nav.groups li {
   cursor: pointer;
   list-style-type: none;
   line-height: 2.3em;
-  padding: 0 15px;
+  padding: 0 2rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 nav.groups li:hover {
   font-weight: bold;
+}
+nav.modules ul {
+  padding: 0;
+  margin: 0;
+}
+nav.modules li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 0 1em;
+  cursor: pointer;
+  opacity: 0.8
+}
+nav.modules li.active {
+  background: #d35400;
+  opacity: 1;
+}
+nav.modules li:hover {
+  opacity: 1;
+}
+nav.modules li span.glyphicon {
+  margin-right: 0.5em;
 }
 /*!
  *  Font Awesome 4.3.0 by @davegandy - http://fontawesome.io - @fontawesome

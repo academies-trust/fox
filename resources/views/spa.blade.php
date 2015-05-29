@@ -86,7 +86,8 @@
             <div class="col-md-8 col-lg-9">
                 <nav class="modules">
                     <ul>
-                        <li ng-repeat="modules in AppCtrl.modules" ui-sref="">[[module.name]]</li>
+                        <li ng-click="AppCtrl.changePost('everything')"><span class="glyphicon glyphicon-[[AppCtrl.getPostIcon('everything')]]"></span>everything</li>
+                        <li ng-repeat="module in AppCtrl.getCurrentModules()" ng-class="{active: AppCtrl.isActive(module.name)}" ng-click="AppCtrl.changePost(module.name)"><span class="glyphicon glyphicon-[[AppCtrl.getPostIcon(module.name)]]"></span>[[module.name]]</li>
                     </ul>
                 </nav>
             </div>

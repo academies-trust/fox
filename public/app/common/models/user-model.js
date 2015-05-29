@@ -5,7 +5,7 @@ angular.module('fox.models.user', ['http-auth-interceptor'])
 		model.groups = [];
 		
 		model.getUser = function() {
-            return $http.get(API_URL + '/token?include=groupUsers.group,groupUsers.permission')
+            return $http.get(API_URL + '/token?include=groupUsers.group.modules,groupUsers.permission')
             			.then(function (res) {
             				storage.set('user', {
             					id: res.data.data.id,
@@ -26,6 +26,7 @@ angular.module('fox.models.user', ['http-auth-interceptor'])
 				write: group.permission.data.write,
 				admin: group.permission.data.admin,
 				own: group.permission.data.own,
+                modules: group.group.data.modules.data,
         	}
         }
 

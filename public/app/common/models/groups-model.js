@@ -14,13 +14,16 @@ angular.module('fox.models.groups', [
 				if(group) {
 					model.currentGroup = {
 						name: group.name,
-						id: group.id
+						id: group.id,
+						modules: group.modules,
 					}
 				}
 			} else {
+				model.groupId = null;
 				model.currentGroup = {
 					name: 'All Groups',
-					id: null
+					id: null,
+					//modules: UserModel.getAccessibleModules();
 				}
 			}
 			return model.currentGroup;
@@ -32,6 +35,10 @@ angular.module('fox.models.groups', [
 
 		model.getGroupId = function() {
 			return model.groupId;
+		}
+
+		model.getCurrentModules = function() {
+			return model.currentGroup.modules;
 		}
 	})
 ;

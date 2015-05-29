@@ -33,13 +33,13 @@ angular.module('fox', [
             });
             $urlRouterProvider.otherwise('/all');
     })
-    .controller('ApplicationController', function ApplicationController($scope, storage, UserModel, $rootScope, $state, GroupsModel, $stateParams) {
+    .controller('ApplicationController', function ApplicationController($scope, storage, UserModel, $rootScope, $state, GroupsModel, $stateParams, $location) {
         'use strict';
         var fox = this,
             authenticated = false;
-
         fox.errors = [];
         fox.currentGroup;
+        fox.currentModule = $location.url().split('/')[2];
         fox.groupSelect = false;
         $scope.currentUser = null;
 
@@ -89,6 +89,45 @@ angular.module('fox', [
             fox.setGroup(groupId);
             $state.go('.',{ groupId: groupId });
             fox.groupSelect = false;
+        }
+
+        fox.getCurrentModules = function() {
+            return GroupsModel.getCurrentModules();
+        }
+
+        fox.changePost = function(post) {
+            fox.currentModule = post;
+            group = fox.currentGroup.id;
+            $state.go('fox.'+post, {groupId: group});
+        }
+
+        fox.isActive = function(post) {
+            return (fox.currentModule === post);
+        }
+
+        fox.getPostIcon = function(post) {
+            switch(post) {
+                case 'everything':
+                    return 'th';
+                    break;
+                case 'articles':
+                    return 'align-left';
+                    break;
+                case 'events':
+                    return 'calendar';
+                    break;
+                case 'notices':
+                    return 'bullhorn';
+                    break;
+                case 'resources':
+                    return 'folder-open';
+                    break;
+                case 'tasks':
+                    return 'tasks';
+                    break;
+                default:
+                    return false;
+            }
         }
 
         $rootScope.$on('event:APIerror', function(error, data) {
