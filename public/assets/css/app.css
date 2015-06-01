@@ -6302,6 +6302,17 @@ label,
 #logo {
   float: none;
 }
+.navbar-brand:after {
+  position: fixed;
+  top: 3rem;
+  right: 1rem;
+  content: '';
+  background: url('http://i.imgur.com/ULWUPTp.jpg') no-repeat;
+  overflow: visible;
+  display: block;
+    width: 200px;
+  height: 193px;
+}
 #logo img {
   max-width: 40%;
 }
@@ -6343,8 +6354,10 @@ label,
 #primaryNav {
   background: #34495e;
 }
-.actions {
-  background: #d35400;
+#secondaryNav {
+  background: #ecf0f1;
+  color: #34495e;
+  border-top: 3px solid #34495e;
 }
 
 #currentGroup {
@@ -6395,13 +6408,13 @@ nav.groups li:hover {
 #fixedNav li {
   list-style-type: none;
   display: inline-block;
-  padding: 0 1em;
   cursor: pointer;
 }
 #fixedNav li span.glyphicon {
   margin-right: 0.5em;
 }
-#fixedNav nav.modules li {
+#fixedNav nav.modules li,
+nav.actions li {
   opacity: 0.8;
   text-align: center;
   font-size: 1.5rem;
@@ -6410,25 +6423,46 @@ nav.groups li:hover {
   height:10rem;
   width:10rem;
 }
+nav.actions li {
+  height: 8rem;
+  width: 8rem;
+  padding: 1rem;
+}
 #fixedNav nav.modules ul {
   line-height: 1;
 }
 #fixedNav nav.modules li.active {
-  background: #d35400;
+  background: #e67e22;
   opacity: 1;
   font-weight: bold;
 }
-nav.modules li:hover {
+nav.modules li:hover,
+nav.actions li {
   opacity: 1;
 }
-#fixedNav nav.modules li span.glyphicon {
+#fixedNav nav.actions ul {
+  line-height: 1;
+}
+nav.actions li.negative {
+  color: #c0392b;
+}
+
+nav.actions li.positive {
+  color: #27ae60;
+}
+
+#fixedNav nav.modules li span.glyphicon,
+nav.actions li span.glyphicon {
   display: block;
   font-size: 3rem;
   margin: 0.25em 0.5em;
 }
+nav.actions li span.glyphicon {
+  font-size: 2rem;
+}
 .panel-default .panel-heading {
   color: #fff;
-  background: #2980b9;
+  background: #34495e;
   border: 0;
   border-radius: 0;
 }

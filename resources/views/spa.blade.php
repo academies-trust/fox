@@ -70,9 +70,9 @@
     </div>
     <div class="container-fluid" id="fixedNav">
         <div class="row" id="secondaryNav">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <nav class="actions text-center">
+                    <nav class="actions text-center container">
                         <ul ui-view="actions">
                         </ul>
                     </nav>
