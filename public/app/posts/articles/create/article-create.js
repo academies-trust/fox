@@ -31,7 +31,5 @@ angular.module('articles.create', ['textAngular', 'pickadate'])
 					$state.go('^', {}, { reload: true });
 				});
 	        }
-
-
 		})
 ;

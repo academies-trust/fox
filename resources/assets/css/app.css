@@ -6343,18 +6343,10 @@ label,
 #primaryNav {
   background: #34495e;
 }
-.actions li {
-  background: #2980b9;
+.actions {
+  background: #d35400;
 }
-.actions li.negative {
-  background: #c0392b;
-}
-.actions li.positive {
-  background: #27ae60;
-}
-.actions li.minor {
-  background: #95a5a6;
-}
+
 #currentGroup {
   background: #2c3e50;
   cursor: pointer;
@@ -6363,6 +6355,8 @@ label,
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  height: 10rem;
+  line-height: 10rem;
 }
 #currentGroup .glyphicon {
   font-size: 1.6rem;
@@ -6381,7 +6375,7 @@ nav.groups ul {
   padding: 0;
   margin: 15px 0;
 }
-nav.groups li {
+#fixedNav nav.groups li {
   cursor: pointer;
   list-style-type: none;
   line-height: 2.3em;
@@ -6389,6 +6383,7 @@ nav.groups li {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  display: block;
 }
 nav.groups li:hover {
   font-weight: bold;
@@ -6403,18 +6398,33 @@ nav.groups li:hover {
   padding: 0 1em;
   cursor: pointer;
 }
-nav.modules li {
-  opacity: 0.8
+#fixedNav li span.glyphicon {
+  margin-right: 0.5em;
 }
-nav.modules li.active {
+#fixedNav nav.modules li {
+  opacity: 0.8;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2;
+  padding: 1em;
+  height:10rem;
+  width:10rem;
+}
+#fixedNav nav.modules ul {
+  line-height: 1;
+}
+#fixedNav nav.modules li.active {
   background: #d35400;
   opacity: 1;
+  font-weight: bold;
 }
 nav.modules li:hover {
   opacity: 1;
 }
-#fixedNav li span.glyphicon {
-  margin-right: 0.5em;
+#fixedNav nav.modules li span.glyphicon {
+  display: block;
+  font-size: 3rem;
+  margin: 0.25em 0.5em;
 }
 .panel-default .panel-heading {
   color: #fff;
