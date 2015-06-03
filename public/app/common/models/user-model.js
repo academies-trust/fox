@@ -3,16 +3,18 @@ angular.module('fox.models.user', ['http-auth-interceptor'])
 	.service('UserModel', function UserModel($http, API_URL, storage, authService, filterFilter, $rootScope){
 		var model = this;
 		model.groups = [];
+        model.user = [];
 		
 		model.getUser = function() {
             return $http.get(API_URL + '/token?include=groupUsers.group.modules,groupUsers.permission')
             			.then(function (res) {
-            				storage.set('user', {
+            				model.user = {
             					id: res.data.data.id,
-            				});
-            				model.name = res.data.data.name;
+                                name: res.data.data.name,
+            				};
             				model.setGroups(res.data.data.groupUsers);
                             authService.loginConfirmed();
+                            return model.user;
             			});
         }
 
@@ -60,7 +62,6 @@ angular.module('fox.models.user', ['http-auth-interceptor'])
         };
 
         model.logout = function() {
-        	storage.remove('user');
         	storage.remove('token');
             $rootScope.$broadcast('event:auth-loginRequired');
         }
@@ -92,6 +93,12 @@ angular.module('fox.models.user', ['http-auth-interceptor'])
                 return false;
             }
 		}
+        model.userCan = function(permission, groupId) {
+            group = _.find(model.groups, function(group) {
+                return group.id === parseInt(groupId, 10);
+            });
+            return (group[permission] === true);
+        }
         model.hasGroup = function(groupId) {
             group = filterFilter(model.groups, {id: groupId});
             if(group.length === 1) {

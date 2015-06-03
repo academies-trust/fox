@@ -40,7 +40,8 @@ angular.module('fox', [
         fox.groupSelect = false;
         $scope.currentUser = null;
 
-        UserModel.getUser().then(function() {
+        UserModel.getUser().then(function(result) {
+            $scope.currentUser = result;
             fox.getGroup();
         });
 
@@ -84,6 +85,14 @@ angular.module('fox', [
 
         fox.getGroupsWhereCan = function(permission)  {
             return UserModel.getGroupsWhereCan(permission);
+        }
+
+        fox.userCan = function(permission, groupId) {
+            return UserModel.userCan(permission, groupId);
+        }
+
+        fox.userOwns = function(resource) {
+            return (resource.user.id === $scope.currentUser.id);
         }
 
         fox.changeGroup = function(groupId) {

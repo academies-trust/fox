@@ -1,2 +1,2 @@
-<li ui-sref="fox.articles.create({groupId: AppCtrl.getGroupUrl()})" class="pull-right"><span class="glyphicon glyphicon-plus"></span> create</li>
+<li ng-if="AppCtrl.userCan('write', AppCtrl.getGroupUrl())" ui-sref="fox.articles.create({groupId: AppCtrl.getGroupUrl()})" class="pull-right"><span class="glyphicon glyphicon-plus"></span> create</li>
 <div class="clearfix"></div>
