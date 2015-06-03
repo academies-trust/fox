@@ -147,9 +147,13 @@ angular.module('fox', [
         fox.checkBodyMargin = debounce(function() {
             $('#appContent').css('margin-bottom', $('#fixedNav').height());
         },250);
+        fox.setActionRowHeight = debounce(function() {
+            $('#actionsNavRow').css('min-height', $('#actionsNav').height());
+        })
 
         $rootScope.$on('$stateChangeSuccess', function() {
             fox.checkBodyMargin();
+            fox.setActionRowHeight();
         });
 
         $(window).resize(function() {

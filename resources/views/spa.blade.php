@@ -124,7 +124,7 @@
         </div>
         <div class="row">
             <div class="container" id="main" ng-if="AppCtrl.isAuthenticated()">
-                <div class="row">
+                <div class="row" id="actionsNavRow">
                     <div class="container-fluid" id="actionsNav" sticky sticky-class="fixed">
                         <div class="row">
                             <nav class="actions text-center container">
