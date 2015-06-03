@@ -6,7 +6,7 @@ angular.module('fox.models.user', ['http-auth-interceptor'])
         model.user = [];
 		
 		model.getUser = function() {
-            return $http.get(API_URL + '/token?include=groupUsers.group.modules,groupUsers.permission')
+            return $http.get(API_URL + '/token?include=groupUsers.group.modules,groupUsers.permission', {withCredentials: true})
             			.then(function (res) {
             				model.user = {
             					id: res.data.data.id,
