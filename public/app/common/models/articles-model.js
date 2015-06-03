@@ -1,7 +1,7 @@
 angular.module('fox.models.articles', [
-
+	'fox.services.dates',
 ])
-	.service('ArticlesModel', function ArticlesModel($http, API_URL, $q, $filter){
+	.service('ArticlesModel', function ArticlesModel($http, API_URL, $q, $filter, DateService){
 		var model = this,
 			articles;
 		model.articleTransformer = function(article) {
@@ -10,7 +10,7 @@ angular.module('fox.models.articles', [
 						name: article.activeContent.data.approvedBy.data.name,
 						email: article.activeContent.data.approvedBy.data.email,
 					} : null;
-			deleted = (article.deleted !== null) ? new Date(article.deleted.date) : null;
+			deleted = (article.deleted !== null) ? DateService.createDate(article.deleted.date) : null;
 			return {
 				id: article.id,
 				comments_enabled: article.comments_enabled,
@@ -19,10 +19,10 @@ angular.module('fox.models.articles', [
 				content: article.activeContent.data.content,
 				content_id: article.content,
 				revisions: model.revisionsTransformer(article.revisions.data),
-				approved: new Date(article.activeContent.data.approved.date),
+				approved: DateService.createDate(article.activeContent.data.approved.date),
 				approved_by: approved_by,
-				updated: new Date(article.activeContent.data.updated.date),
-				published: new Date(article.published.date),
+				updated: DateService.createDate(article.activeContent.data.updated.date),
+				published: DateService.createDate(article.published.date),
 				group: article.group,
 				user: {
 					name: article.activeContent.data.user.data.name,
@@ -41,13 +41,13 @@ angular.module('fox.models.articles', [
 			return transformedComments;
 		}
 		model.commentTransformer = function (comment) {
-			deleted = (comment.deleted !== null) ? new Date(comment.deleted.date) : null;
+			deleted = (comment.deleted !== null) ? DateService.createDate(comment.deleted.date) : null;
 			return {
 				id: comment.id,
 				content: comment.content,
-				created: new Date(comment.created.date),
-				//published: new Date(comment.published.date),
-				updated: new Date(comment.updated.date),
+				created: DateService.createDate(comment.created.date),
+				//published: DateService.createDate(comment.published.date),
+				updated: DateService.createDate(comment.updated.date),
 				deleted: deleted,
 				user: {
 					name: comment.user.data.name,
@@ -69,19 +69,19 @@ angular.module('fox.models.articles', [
 						name: revision.approvedBy.data.name,
 						email: revision.approvedBy.data.email,
 					} : null;
-			created = new Date(revision.created.date);
+			created = DateService.createDate(revision.created.date);
 			created_formatted = $filter('date')(created, 'dd/MM/yyyy @ h:mma');
 			return {
 				id: parseInt(revision.id,10),
 				content: revision.content,
 				title: revision.title,
 				reason: revision.reason,
-				approved: new Date(revision.approved.date),
+				approved: DateService.createDate(revision.approved.date),
 				approved_by: approved_by,
 				created: created,
 				created_formatted: created_formatted,
-				//published: new Date(revision.published.date),
-				updated: new Date(revision.updated.date),
+				//published: DateService.createDate(revision.published.date),
+				updated: DateService.createDate(revision.updated.date),
 				user: {
 					name: revision.user.data.name,
 					id: revision.user.data.id,
@@ -124,7 +124,7 @@ angular.module('fox.models.articles', [
         	});
         }
         model.createArticle = function(article) {
-        	publishedD = new Date(article.published);
+        	publishedD = DateService.createDate(article.published);
         	return $http.post(API_URL + '/groups/'+article.group+'/articles', {
         		title: article.title,
         		content: article.content,
@@ -134,7 +134,7 @@ angular.module('fox.models.articles', [
         	});
         }
         model.editArticle = function(article) {
-        	publishedD = new Date(article.published);
+        	publishedD = DateService.createDate(article.published);
         	return $http.post(API_URL + '/articles/'+article.id, {
         		_method: 'PATCH',
         		title: article.title,

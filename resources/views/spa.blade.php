@@ -166,5 +166,6 @@
     <script src="{{ url('/app/posts/everything/everything.js') }}"></script>
     <script src="{{ url('/app/posts/everything/list/everything-list.js') }}"></script>
     <script src="{{ url('/app/common/models/posts-model.js') }}"></script>
+    <script src="{{ url('/app/common/services/date-service.js') }}"></script>
 </body>
 </html>

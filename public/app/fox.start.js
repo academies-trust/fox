@@ -208,4 +208,16 @@ angular.module('fox', [
             return config;
         }
     })
+    .run([
+        '$rootScope', '$state', '$stateParams',
+        function ($rootScope, $state, $stateParams) {
+            // Attach state variables to rootScope so we can access them
+            // in controllers.
+            $rootScope.$state = $state;
+            $rootScope.$stateParams = $stateParams;
+            $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+                throw error;
+            });
+        }
+    ]);
 ;
