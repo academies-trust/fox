@@ -69,43 +69,39 @@
         </div>
     </div>
     <div class="container-fluid" id="fixedNav">
-        <div class="row" id="secondaryNav">
-            <div class="container-fluid">
-                <div class="row">
-                    <nav class="actions text-center container">
-                        <ul ui-view="actions">
+        <div class="row" id="modulesNav">
+            <div class="container text-center">
+                <div class="col-md-12">
+                    <nav class="modules">
+                        <ul>
+                            <li ng-click="AppCtrl.changePost('everything')"><span class="glyphicon glyphicon-[[AppCtrl.getPostIcon('everything')]]"></span>everything</li>
+                            <li ng-repeat="module in AppCtrl.getCurrentModules()" ng-class="{active: AppCtrl.isActive(module.name)}" ng-click="AppCtrl.changePost(module.name)"><span class="glyphicon glyphicon-[[AppCtrl.getPostIcon(module.name)]]"></span>[[module.name]]</li>
                         </ul>
                     </nav>
                 </div>
             </div>
         </div>
-        <div class="row" id="primaryNav">
-            <div class="col-md-4 col-lg-3" id="currentGroup">
-                <div ng-click="AppCtrl.toggleGroupSelect()">
-                    <span class="glyphicon glyphicon-list" ng-hide="AppCtrl.groupSelect"></span> 
-                    <span class="glyphicon glyphicon-remove" ng-show="AppCtrl.groupSelect"></span> 
-                    <span ng-bind="AppCtrl.currentGroup.name"></span>
+        <div class="row" id="groupNav">
+            <div class="container">
+                <div class="col-md-6 col-md-offset-3" id="currentGroup">
+                    <div ng-click="AppCtrl.toggleGroupSelect()" class="text-center">
+                        <span class="glyphicon glyphicon-list pull-left" ng-hide="AppCtrl.groupSelect"></span> 
+                        <span class="glyphicon glyphicon-remove pull-left" ng-show="AppCtrl.groupSelect"></span> 
+                        <span ng-bind="AppCtrl.currentGroup.name"></span>
+                    </div>
+                    <nav class="groups" ng-show="AppCtrl.groupSelect">
+                        <ul>
+                            <li ng-click="AppCtrl.changeGroup('all')">All Groups</li>
+                            <li ng-repeat="group in AppCtrl.getGroupsWhereCan('read')" ng-click="AppCtrl.changeGroup(group.id)">[[group.name]]</li>
+                        </ul>
+                    </nav>
                 </div>
-                <nav class="groups" ng-show="AppCtrl.groupSelect">
-                    <ul>
-                        <li ng-click="AppCtrl.changeGroup('all')">All Groups</li>
-                        <li ng-repeat="group in AppCtrl.getGroupsWhereCan('read')" ng-click="AppCtrl.changeGroup(group.id)">[[group.name]]</li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="col-md-8 col-lg-9">
-                <nav class="modules">
-                    <ul>
-                        <li ng-click="AppCtrl.changePost('everything')"><span class="glyphicon glyphicon-[[AppCtrl.getPostIcon('everything')]]"></span>everything</li>
-                        <li ng-repeat="module in AppCtrl.getCurrentModules()" ng-class="{active: AppCtrl.isActive(module.name)}" ng-click="AppCtrl.changePost(module.name)"><span class="glyphicon glyphicon-[[AppCtrl.getPostIcon(module.name)]]"></span>[[module.name]]</li>
-                    </ul>
-                </nav>
             </div>
         </div>
     </div>
     <div class="container-fluid" id="appContent">
         <div class="row">
-            <nav class="navbar navbar-default" role="navigation">
+            <nav class="navbar navbar-default" id="suppNav" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                   <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
@@ -114,15 +110,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href ui-sref="fox.posts">
-                    <img src="{{url('assets/images/foxlogo.png')}}">
-                  </a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" collapse="navbarCollapsed">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href ui-sref="fox.posts" ng-if="AppCtrl.isAuthenticated()">Home</a></li>
+                        <li><a href ui-sref="fox.everything" ng-if="AppCtrl.isAuthenticated()">Home</a></li>
                         <li><a ng-href="fox.user" ng-if="AppCtrl.isAuthenticated()">My Account</a></li>
                         <li><a href ng-controller="AuthCtrl as Auth" ng-click="Auth.logout()" ng-if="AppCtrl.isAuthenticated()">Logout</a></li>
                     </ul>
@@ -131,6 +124,16 @@
         </div>
         <div class="row">
             <div class="container" id="main" ng-if="AppCtrl.isAuthenticated()">
+                <div class="row">
+                    <div class="container-fluid" id="actionsNav" sticky sticky-class="fixed">
+                        <div class="row">
+                            <nav class="actions text-center container">
+                                <ul ui-view="actions">
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12" ui-view="forms">
                     </div>
@@ -160,6 +163,8 @@
     <script src="{{ url('/app/user/login/user-login.js') }}"></script>
     <script src="{{ url('/app/common/models/user-model.js') }}"></script>
     <script src="{{ url('/app/common/models/groups-model.js') }}"></script>
-
+    <script src="{{ url('/app/posts/everything/everything.js') }}"></script>
+    <script src="{{ url('/app/posts/everything/list/everything-list.js') }}"></script>
+    <script src="{{ url('/app/common/models/posts-model.js') }}"></script>
 </body>
 </html>

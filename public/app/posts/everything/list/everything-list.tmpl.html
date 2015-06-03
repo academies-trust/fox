@@ -1,0 +1,27 @@
+<div class="row" ng-repeat="article in ArtCtrl.articles">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href ui-sref="fox.articles.show({articleId: article.id})"><strong class="h3">[[article.title]]</strong></a>
+            </div>
+            <div class="panel-body" ng-bind-html="article.content">
+            </div>
+            <div class="panel-footer">
+                <strong><small>by [[article.user.name]]</small></strong><small class="pull-right">[[article.published | date:'fullDate']]</small>
+            </div>
+            <div ng-if="article.comments_enabled">
+                <div class="panel-body" ng-if="article.comments[0]">
+                    <div ng-repeat="comment in article.comments">
+                        <h5 class="pull-right">[[comment.created]]</h5>
+                        <strong>[[comment.user.name]]:</strong>
+                        <div ng-bind-html="comment.content">
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer" ui-sref="fox.articles.show({articleId: article.id})">
+                    <button type="button" class="btn btn-link btn-block">Add a comment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,6 +8,7 @@ angular.module('fox', [
     'groups',
     'pickadate',
     'ui.bootstrap',
+    'sticky',
 ], function config($httpProvider) {
     $httpProvider.interceptors.push('TokenInterceptor');
 })
@@ -19,19 +20,15 @@ angular.module('fox', [
         $stateProvider
             .state('fox', {
                 url: '/:groupId',
-                views: {
-                    'posts@': {
-                        controller: 'ApplicationController as AppCtrl',
-                        templateUrl: 'app/posts/articles/list/article-list.tmpl.html',
-                    },
-                },
+                abstract: true,
+                controller: 'ApplicationController as AppCtrl',
                 resolve: {
                     groupId: function($stateParams, GroupsModel){
                         return GroupsModel.setGroup($stateParams.groupId).id;
                     }
                 }
             });
-            $urlRouterProvider.otherwise('/all');
+            $urlRouterProvider.otherwise('/');
     })
     .controller('ApplicationController', function ApplicationController($scope, storage, UserModel, $rootScope, $state, GroupsModel, $stateParams, $location) {
         'use strict';
@@ -77,6 +74,10 @@ angular.module('fox', [
             return fox.currentGroup;
         }
 
+        fox.getGroupUrl = function() {
+            return (fox.currentGroup.id || 'all');
+        }
+
         fox.toggleGroupSelect = function() {
             fox.groupSelect = (fox.groupSelect) ? false : true;
         }
@@ -87,7 +88,7 @@ angular.module('fox', [
 
         fox.changeGroup = function(groupId) {
             fox.setGroup(groupId);
-            $state.go('.',{ groupId: groupId });
+            $state.go('fox.everything',{ groupId: groupId });
             fox.groupSelect = false;
         }
 
@@ -129,6 +130,31 @@ angular.module('fox', [
                     return false;
             }
         }
+        function debounce(func, wait, immediate) {
+            var timeout;
+            return function() {
+                var context = this, args = arguments;
+                var later = function() {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                };
+                var callNow = immediate && !timeout;
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow) func.apply(context, args);
+            };
+        };
+        fox.checkBodyMargin = debounce(function() {
+            $('#appContent').css('margin-bottom', $('#fixedNav').height());
+        },250);
+
+        $rootScope.$on('$stateChangeSuccess', function() {
+            fox.checkBodyMargin();
+        });
+
+        $(window).resize(function() {
+            fox.checkBodyMargin();
+        });
 
         $rootScope.$on('event:APIerror', function(error, data) {
             fox.errors.push(data);

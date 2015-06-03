@@ -1,7 +1,7 @@
-angular.module('fox.models.articles', [
+angular.module('fox.models.posts', [
 
 ])
-	.service('ArticlesModel', function ArticlesModel($http, API_URL, $q, $filter){
+	.service('PostsModel', function PostsModel($http, API_URL, $q, $filter){
 		var model = this,
 			articles;
 		model.articleTransformer = function(article) {
@@ -10,7 +10,6 @@ angular.module('fox.models.articles', [
 						name: article.activeContent.data.approvedBy.data.name,
 						email: article.activeContent.data.approvedBy.data.email,
 					} : null;
-			deleted = (article.deleted !== null) ? new Date(article.deleted.date) : null;
 			return {
 				id: article.id,
 				comments_enabled: article.comments_enabled,
@@ -30,7 +29,6 @@ angular.module('fox.models.articles', [
 					email: article.activeContent.data.user.data.email,
 				},
 				comments: model.commentsTransformer(article.comments.data),
-				deleted: deleted,
 			}
 		}
 		model.commentsTransformer = function (comments) {
@@ -41,14 +39,12 @@ angular.module('fox.models.articles', [
 			return transformedComments;
 		}
 		model.commentTransformer = function (comment) {
-			deleted = (comment.deleted !== null) ? new Date(comment.deleted.date) : null;
 			return {
 				id: comment.id,
 				content: comment.content,
 				created: new Date(comment.created.date),
 				//published: new Date(comment.published.date),
 				updated: new Date(comment.updated.date),
-				deleted: deleted,
 				user: {
 					name: comment.user.data.name,
 					id: comment.user.data.id,
@@ -158,13 +154,6 @@ angular.module('fox.models.articles', [
 			return $http.post(API_URL + '/articles/'+article.id, {
 				_method: 'PATCH',
 				revision: revisionId,
-			});
-		}
-		model.deleteArticle = function(articleId) {
-			return $http.post(API_URL+'/articles/'+articleId+'?include=activeContent.user,activeContent.approvedBy,revisions.user,revisions.approvedBy,comments.user', {
-				_method: 'DELETE',
-			}).then(function(result) {
-				return model.articleTransformer(result.data.data);
 			});
 		}
 	})

@@ -1,1 +1,1 @@
-angular.module('articles.list', []);
+angular.module('everything.list', []);

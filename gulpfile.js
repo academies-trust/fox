@@ -31,6 +31,7 @@ elixir(function(mix) {
     mix.copy('vendor/bower_components/pickadate/lib/picker.time.js', 'resources/assets/js/vendor/picker.time.js');
     mix.copy('vendor/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js', 'resources/assets/js/vendor/bootstrap.js');
     mix.copy('vendor/bower_components/lodash/lodash.min.js', 'resources/assets/js/vendor/lodash.js');
+    mix.copy('vendor/bower_components/ngSticky/dist/sticky.min.js', 'resources/assets/js/vendor/sticky.js');
 
 	mix.copy('vendor/bower_components/angular-loading-bar/src/loading-bar.css', 'resources/assets/css/vendor/loading-bar.css');
 	mix.copy('vendor/bower_components/textAngular/src/textAngular.css', 'public/assets/css/vendor/textAngular.css');
@@ -55,6 +56,7 @@ elixir(function(mix) {
         "vendor/picker.js",
         "vendor/picker.date.js",
         "vendor/picker.time.js",
+        "vendor/sticky.js",
         "vendor/bootstrap.js",
     ], "public/assets/js", 'resources/assets/js');
 

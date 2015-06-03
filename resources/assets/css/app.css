@@ -6265,6 +6265,10 @@ label,
 .checkbox label {
   font-weight: 300;
 }
+body {
+  background: #f1f1f1;
+  color: #484848;
+}
 #appLoading,
 #requestLoading {
   position: fixed;
@@ -6302,17 +6306,6 @@ label,
 #logo {
   float: none;
 }
-.navbar-brand:after {
-  position: fixed;
-  top: 3rem;
-  right: 1rem;
-  content: '';
-  background: url('http://i.imgur.com/ULWUPTp.jpg') no-repeat;
-  overflow: visible;
-  display: block;
-    width: 200px;
-  height: 193px;
-}
 #logo img {
   max-width: 40%;
 }
@@ -6347,32 +6340,56 @@ label,
   left: 0px;
   right: 0px;
   z-index: 2;
+  color: #484848;
+  font-size: 1.3em;
+  line-height: 5rem;
+}
+#groupNav {
+  background: #484848;
   color: #fff;
-  font-size: 1.5em;
-  line-height: 3em;
 }
-#primaryNav {
-  background: #34495e;
+#modulesNav {
+  background: #fff;
+  box-shadow: 0 -0.5rem 0 0 rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 -0.5rem 0 0 rgba(0,0,0,0.3);
+  -o-box-shadow: 0 -0.5rem 0 0 rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 -0.5rem 0 0 rgba(0,0,0,0.3);
 }
-#secondaryNav {
-  background: #ecf0f1;
+#actionsNav {
   color: #34495e;
-  border-top: 3px solid #34495e;
+  transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+}
+#actionsNav.fixed {
+  border-top: 3px solid #e67e22;
+  background: #fff;
+  z-index: 3;
+  box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
+  -o-box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
+}
+#suppNav {
+  border-radius: 0;
+  box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
+  -o-box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
 }
 
 #currentGroup {
-  background: #2c3e50;
   cursor: pointer;
 }
 #currentGroup > div {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  height: 10rem;
-  line-height: 10rem;
 }
 #currentGroup .glyphicon {
-  font-size: 1.6rem;
+  font-size: 2rem;
+  line-height: 2.4;
   margin-right: 1em;
 } 
 nav.groups {
@@ -6401,16 +6418,19 @@ nav.groups ul {
 nav.groups li:hover {
   font-weight: bold;
 }
-#fixedNav ul {
+#fixedNav ul,
+#actionsNav ul {
   padding: 0;
   margin: 0;
 }
-#fixedNav li {
+#fixedNav li,
+#actionsNav li {
   list-style-type: none;
   display: inline-block;
   cursor: pointer;
 }
-#fixedNav li span.glyphicon {
+#fixedNav li span.glyphicon,
+#actionsNav li span.glyphicon {
   margin-right: 0.5em;
 }
 #fixedNav nav.modules li,
@@ -6421,7 +6441,7 @@ nav.actions li {
   line-height: 2;
   padding: 1em;
   height:10rem;
-  width:10rem;
+  width:14rem;
 }
 nav.actions li {
   height: 8rem;
@@ -6433,14 +6453,16 @@ nav.actions li {
 }
 #fixedNav nav.modules li.active {
   background: #e67e22;
+  color: #fff;
   opacity: 1;
-  font-weight: bold;
 }
-nav.modules li:hover,
+nav.modules li:hover {
+  background: #ddd;
+}
 nav.actions li {
   opacity: 1;
 }
-#fixedNav nav.actions ul {
+nav.actions ul {
   line-height: 1;
 }
 nav.actions li.negative {
@@ -6461,14 +6483,15 @@ nav.actions li span.glyphicon {
   font-size: 2rem;
 }
 .panel-default .panel-heading {
-  color: #fff;
-  background: #34495e;
+  color: #e67e22;
+  background: #fff;
+  padding-bottom: 0;
   border: 0;
   border-radius: 0;
 }
 .panel-heading a,
 .panel-heading a:hover {
-  color: #fff;
+  color: #e67e22;
 }
 .panel-heading .h3 {
   line-height: 1.8em;
@@ -6479,4 +6502,8 @@ nav.actions li span.glyphicon {
 .panel-default {
   border-radius: 0;
   border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  -moz-box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  -o-box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.1);
 }

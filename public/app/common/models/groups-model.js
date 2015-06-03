@@ -34,7 +34,6 @@ angular.module('fox.models.groups', [
 		}
 
 		model.getGroupId = function() {
-			console.log(model.groupId);
 			return model.groupId;
 		}
 

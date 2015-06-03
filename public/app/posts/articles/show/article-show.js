@@ -21,7 +21,6 @@ angular.module('articles.show', ['textAngular'])
 			})
 	})
 	.controller('ShowArticleController', function ShowArticleController($stateParams, UserModel, ArticlesModel, $state, articles) {
-		console.log(articles);
 		var show = this;
 		show.article = articles;
 		var newComment,
@@ -35,6 +34,12 @@ angular.module('articles.show', ['textAngular'])
 				$state.go('fox.articles.show', {articleId: show.article.id}, {reload: true});
 			}).finally(function() {
 				show.postingComment = false;
+			});
+		}
+
+		show.deleteArticle = function() {
+			ArticlesModel.deleteArticle(show.article.id).then(function(res) {
+				show.article = res;
 			});
 		}
 
