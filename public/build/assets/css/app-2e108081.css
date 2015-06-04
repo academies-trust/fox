@@ -6395,10 +6395,11 @@ body {
 } 
 nav.groups {
   position: absolute;
-  bottom: 100%;
+  top: 100%;
   left: 0;
   right: 0;
-  background: #2c3e50;
+  z-index: 2;
+  background: #484848;
   color: #fff;
   font-size: 1.7rem;
 }
@@ -6409,7 +6410,7 @@ nav.groups ul {
 #fixedNav nav.groups li {
   cursor: pointer;
   list-style-type: none;
-  line-height: 2.3em;
+  line-height: 3;
   padding: 0 2rem;
   overflow: hidden;
   white-space: nowrap;
