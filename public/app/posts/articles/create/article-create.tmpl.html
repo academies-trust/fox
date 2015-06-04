@@ -3,10 +3,10 @@
         <strong class="h3">Create Article</strong>
     </div>
     <div class="panel-body">
-    	<form ng-submit="createArtCtrl.create(newArticle)">
+    	<form ng-submit="createArtCtrl.create(createArtCtrl.article)">
             <div class="form-group">
             	<label for="client">Group</label>
-            	<select ng-init="newArticle.group = null" required class="form-control" id="client" ng-model="newArticle.group">
+            	<select ng-init="createArtCtrl.article.group = null" required class="form-control" id="client" ng-model="createArtCtrl.article.group">
             		<option selected value="null">-- Please Select -- </option>
             		<option ng-repeat="group in createArtCtrl.getGroupsWhereCan('write')" value="[[group.id]]">
             			[[group.name]]
@@ -15,28 +15,41 @@
             </div>
             <div class="form-group">
             	<label for="title">Title</label>
-            	<input type="text" required class="form-control" id="title" maxlength="255" ng-model="newArticle.title">
+            	<input type="text" required class="form-control" id="title" maxlength="255" ng-model="createArtCtrl.article.title">
             </div>
             <div class="form-group">
             	<label for="content">Content</label>
-            	<text-angular name="content" ng-model="newArticle.content"></text-angular>
+            	<text-angular name="content" ng-model="createArtCtrl.article.content"></text-angular>
             </div>
             <div class="form-group">
             	<label for="published">Publish Date</label>
-            	<input pick-a-date="newArticle.published" type="text" required class="form-control" id="published" maxlength="255">
+            	<input pick-a-date="createArtCtrl.article.published" type="text" required class="form-control" id="published" maxlength="255">
             </div>
             <div class="checkbox">
             	<label for="comments">
-                	<input type="checkbox" value="1" id="comments" ng-model="newArticle.comments">
+                	<input type="checkbox" value="1" id="comments" ng-model="createArtCtrl.article.comments">
                 	Allow Comments
             	</label>
             </div>
             <div class="checkbox">
             	<label for="help">
-            		<input type="checkbox" value="1" id="help" ng-model="newArticle.help">
+            		<input type="checkbox" value="1" id="help" ng-model="createArtCtrl.article.help">
             		Add to Help
             	</label>
             </div>
         </form>
+    </div>
+</div>
+<div class="row" id="actionsNavRow">
+    <div class="container-fluid" id="actionsNav">
+        <div class="row">
+            <nav class="actions text-center container">
+                <ul>
+                    <li ui-sref="fox.articles({groupId: AppCtrl.getGroupUrl()})" class="pull-left"><span class="glyphicon glyphicon-remove"></span>cancel</li>
+                    <li class="pull-right positive" ng-click="createArtCtrl.create(createArtCtrl.article)"><span class="glyphicon glyphicon-ok"></span>create</li>
+                    <div class="clearfix"></div>
+                </ul>
+            </nav>
+        </div>
     </div>
 </div>

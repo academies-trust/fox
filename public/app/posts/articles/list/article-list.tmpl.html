@@ -25,3 +25,15 @@
         </div>
     </div>
 </div>
+<div class="row" id="actionsNavRow">
+    <div class="container-fluid" id="actionsNav">
+        <div class="row">
+            <nav class="actions text-center container">
+                <ul>
+                    <li ng-if="AppCtrl.userCan('write', AppCtrl.getGroupUrl())" ui-sref="fox.articles.create({groupId: AppCtrl.getGroupUrl()})" class="pull-right"><span class="glyphicon glyphicon-plus"></span> create</li>
+                    <div class="clearfix"></div>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

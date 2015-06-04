@@ -15,10 +15,6 @@ angular.module('articles', [
 						controller: 'ArticlesController as ArtCtrl',
 						templateUrl: 'app/posts/articles/list/article-list.tmpl.html'
 					},
-					'actions@': {
-						controller: 'ArticlesController as ArtCtrl',
-						templateUrl: 'app/posts/articles/list/article-list-actions.tmpl.html'
-					}
 				},
 				resolve: {
                     articles: function(ArticlesModel, GroupsModel) {

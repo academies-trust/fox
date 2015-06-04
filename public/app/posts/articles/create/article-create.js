@@ -11,22 +11,27 @@ angular.module('articles.create', ['textAngular', 'pickadate'])
 					'posts@': {
 
 					},
-					'actions@': {
-						controller: 'CreateArticleController as createArtCtrl',
-						templateUrl: 'app/posts/articles/create/article-create-actions.tmpl.html'
-					}
 				}
 			})
 		})
-		.controller('CreateArticleController', function createArticleController($stateParams, UserModel, ArticlesModel, filterFilter, $state) {
-			create = this;
+		.controller('CreateArticleController', function createArticleController($stateParams, UserModel, ArticlesModel, filterFilter, $state, $scope) {
+			var create = this;
+			create.article = {
+				group: null,
+				title: null,
+				content: null,
+				published: null,
+				comments: null,
+				help: null
+			};
 
 			create.getGroupsWhereCan = function(permission)	{
 				return UserModel.getGroupsWhereCan(permission);
 			}
 
 			create.create = function(article) {
-	            ArticlesModel.createArticle(article)
+				console.log(create.article);
+	            ArticlesModel.createArticle(create.article)
 				.then(function(result) {
 					$state.go('^', {}, { reload: true });
 				});

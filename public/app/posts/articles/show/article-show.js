@@ -8,10 +8,6 @@ angular.module('articles.show', ['textAngular'])
 						controller: 'ShowArticleController as showArtCtrl',
 						templateUrl: 'app/posts/articles/show/article-show.tmpl.html'
 					},
-					'actions@': {
-						controller: 'ShowArticleController as showArtCtrl',
-						templateUrl: 'app/posts/articles/show/article-show-actions.tmpl.html'
-					}
 				},
 				resolve: {
                     articles: function(ArticlesModel, $stateParams) {

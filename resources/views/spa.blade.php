@@ -126,16 +126,6 @@
         </div>
         <div class="row">
             <div class="container" id="main" ng-if="AppCtrl.isAuthenticated()">
-                <div class="row" id="actionsNavRow">
-                    <div class="container-fluid" id="actionsNav">
-                        <div class="row">
-                            <nav class="actions text-center container">
-                                <ul ui-view="actions">
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-md-12" ui-view="forms">
                     </div>

@@ -11,10 +11,6 @@ angular.module('articles.edit', ['textAngular', 'pickadate'])
 					'posts@' : {
 
 					},
-					'actions@': {
-						controller: 'EditArticleController as editArtCtrl',
-						templateUrl: 'app/posts/articles/edit/article-edit-actions.tmpl.html'
-					}
 				},
 				resolve: {
                     article: function(ArticlesModel, $stateParams) {

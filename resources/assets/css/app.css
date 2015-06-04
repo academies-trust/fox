@@ -6338,6 +6338,7 @@ body {
   margin-bottom: 2em;
 }
 #fixedNav {
+  z-index: 3;
   color: #484848;
   font-size: 1.3em;
   line-height: 5rem;
@@ -6347,7 +6348,7 @@ body {
   -o-transition: background 0.5s,box-shadow 0.5s;
 }
 #fixedNav.fixed {
-  z-index: 2;
+  z-index: 3;
   background: #fff;
   box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
   -moz-box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
