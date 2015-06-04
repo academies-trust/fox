@@ -1,4 +1,4 @@
-<li ng-if="AppCtrl.userCan('contribute', AppCtrl.getGroupUrl()) && !showArtCtrl.article.deleted" class="pull-right"><span class="glyphicon glyphicon-comment"></span> comment</li>
+<li ng-if="AppCtrl.userCan('contribute', AppCtrl.getGroupUrl()) && !showArtCtrl.article.deleted && showArtCtrl.article.comments_enabled" class="pull-right"><span class="glyphicon glyphicon-comment"></span> comment</li>
 <li ui-sref="fox.articles({groupId: AppCtrl.getGroupUrl()})" class="minor pull-left"><span class="glyphicon glyphicon-chevron-left"></span> back</li>
 <li ng-if="(AppCtrl.userCan('admin', AppCtrl.getGroupUrl()) || AppCtrl.userOwns(showArtCtrl.article)) && !showArtCtrl.article.deleted" class="negative" ng-click="showArtCtrl.deleteArticle()"><span class="glyphicon glyphicon-remove"></span> delete</li>
 <li class="" ng-click="showArtCtrl.restoreArticle()" ng-if="(AppCtrl.userCan('admin', AppCtrl.getGroupUrl()) || AppCtrl.userOwns(showArtCtrl.article)) && showArtCtrl.article.deleted"><span class="glyphicon glyphicon-repeat"></span> restore</li>

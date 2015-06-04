@@ -6341,6 +6341,10 @@ body {
   color: #484848;
   font-size: 1.3em;
   line-height: 5rem;
+  transition: background 0.5s,box-shadow 0.5s;
+  -moz-transition: background 0.5s,box-shadow 0.5s;
+  -webkit-transition: background 0.5s,box-shadow 0.5s;
+  -o-transition: background 0.5s,box-shadow 0.5s;
 }
 #fixedNav.fixed {
   z-index: 2;
@@ -6360,10 +6364,6 @@ body {
   left: 0;
   right: 0;
   color: #34495e;
-  transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
   background: #fff;
   z-index: 3;
   box-shadow: 0 -0.5rem 0 0 rgba(0,0,0,0.3);
@@ -6453,13 +6453,24 @@ nav.actions li {
 #fixedNav nav.modules ul {
   line-height: 1;
 }
+#fixedNav nav.modules li {
+  opacity: 0.6;
+}
+#fixedNav.fixed nav.modules li {
+  opacity: 0.8;
+}
 #fixedNav nav.modules li.active {
+  color: #e67e22;
+  opacity: 1;
+}
+#fixedNav.fixed nav.modules li.active {
   background: #e67e22;
   color: #fff;
   opacity: 1;
 }
-nav.modules li:hover {
+#fixedNav nav.modules li:hover {
   background: #ddd;
+  opacity: 1;
 }
 nav.actions li {
   opacity: 1;
