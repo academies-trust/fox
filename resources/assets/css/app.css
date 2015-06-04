@@ -6334,44 +6334,45 @@ body {
   cursor: default;
   background-color: #fff;
 }
+#fixedNavRow {
+  margin-bottom: 2em;
+}
 #fixedNav {
-  position: fixed;
-  bottom: 0;
-  left: 0px;
-  right: 0px;
-  z-index: 2;
   color: #484848;
   font-size: 1.3em;
   line-height: 5rem;
 }
-#groupNav {
-  background: #484848;
-  color: #fff;
-}
-#modulesNav {
+#fixedNav.fixed {
+  z-index: 2;
   background: #fff;
-  box-shadow: 0 -0.5rem 0 0 rgba(0,0,0,0.3);
-  -moz-box-shadow: 0 -0.5rem 0 0 rgba(0,0,0,0.3);
-  -o-box-shadow: 0 -0.5rem 0 0 rgba(0,0,0,0.3);
-  -webkit-box-shadow: 0 -0.5rem 0 0 rgba(0,0,0,0.3);
-}
-#actionsNav {
-  color: #34495e;
-  transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
-}
-#actionsNav.fixed {
-  border-top: 3px solid #e67e22;
-  background: #fff;
-  z-index: 3;
   box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
   -moz-box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
   -o-box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
   -webkit-box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
 }
+#groupNav {
+  background: #484848;
+  color: #fff;
+}
+#actionsNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #34495e;
+  transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  background: #fff;
+  z-index: 3;
+  box-shadow: 0 -0.5rem 0 0 rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 -0.5rem 0 0 rgba(0,0,0,0.3);
+  -o-box-shadow: 0 -0.5rem 0 0 rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 -0.5rem 0 0 rgba(0,0,0,0.3);
+}
 #suppNav {
+  margin-bottom: 0;
   border-radius: 0;
   box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);
   -moz-box-shadow: 0 0.5rem 0 0 rgba(0,0,0,0.3);

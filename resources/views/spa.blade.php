@@ -68,37 +68,6 @@
             <h1>Loading</h1>
         </div>
     </div>
-    <div class="container-fluid" id="fixedNav">
-        <div class="row" id="modulesNav">
-            <div class="container text-center">
-                <div class="col-md-12">
-                    <nav class="modules">
-                        <ul>
-                            <li ng-click="AppCtrl.changePost('everything')"><span class="glyphicon glyphicon-[[AppCtrl.getPostIcon('everything')]]"></span>everything</li>
-                            <li ng-repeat="module in AppCtrl.getCurrentModules()" ng-class="{active: AppCtrl.isActive(module.name)}" ng-click="AppCtrl.changePost(module.name)"><span class="glyphicon glyphicon-[[AppCtrl.getPostIcon(module.name)]]"></span>[[module.name]]</li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <div class="row" id="groupNav">
-            <div class="container">
-                <div class="col-md-6 col-md-offset-3" id="currentGroup">
-                    <div ng-click="AppCtrl.toggleGroupSelect()" class="text-center">
-                        <span class="glyphicon glyphicon-list pull-left" ng-hide="AppCtrl.groupSelect"></span> 
-                        <span class="glyphicon glyphicon-remove pull-left" ng-show="AppCtrl.groupSelect"></span> 
-                        <span ng-bind="AppCtrl.currentGroup.name"></span>
-                    </div>
-                    <nav class="groups" ng-show="AppCtrl.groupSelect">
-                        <ul>
-                            <li ng-click="AppCtrl.changeGroup('all')">All Groups</li>
-                            <li ng-repeat="group in AppCtrl.getGroupsWhereCan('read')" ng-click="AppCtrl.changeGroup(group.id)">[[group.name]]</li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container-fluid" id="appContent">
         <div class="row">
             <nav class="navbar navbar-default" id="suppNav" role="navigation">
@@ -122,10 +91,43 @@
                 </div>
             </nav>
         </div>
+        <div id="fixedNavRow" class="row">
+            <div class="col-md-12" id="fixedNav" sticky sticky-class="fixed">
+                <div class="row" id="groupNav">
+                    <div class="container">
+                        <div class="col-md-6 col-md-offset-3" id="currentGroup">
+                            <div ng-click="AppCtrl.toggleGroupSelect()" class="text-center">
+                                <span class="glyphicon glyphicon-list pull-left" ng-hide="AppCtrl.groupSelect"></span> 
+                                <span class="glyphicon glyphicon-remove pull-left" ng-show="AppCtrl.groupSelect"></span> 
+                                <span ng-bind="AppCtrl.currentGroup.name"></span>
+                            </div>
+                            <nav class="groups" ng-show="AppCtrl.groupSelect">
+                                <ul>
+                                    <li ng-click="AppCtrl.changeGroup('all')">All Groups</li>
+                                    <li ng-repeat="group in AppCtrl.getGroupsWhereCan('read')" ng-click="AppCtrl.changeGroup(group.id)">[[group.name]]</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="modulesNav">
+                    <div class="container text-center">
+                        <div class="col-md-12">
+                            <nav class="modules">
+                                <ul>
+                                    <li ng-click="AppCtrl.changePost('everything')"><span class="glyphicon glyphicon-[[AppCtrl.getPostIcon('everything')]]"></span>everything</li>
+                                    <li ng-repeat="module in AppCtrl.getCurrentModules()" ng-class="{active: AppCtrl.isActive(module.name)}" ng-click="AppCtrl.changePost(module.name)"><span class="glyphicon glyphicon-[[AppCtrl.getPostIcon(module.name)]]"></span>[[module.name]]</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="container" id="main" ng-if="AppCtrl.isAuthenticated()">
                 <div class="row" id="actionsNavRow">
-                    <div class="container-fluid" id="actionsNav" sticky sticky-class="fixed">
+                    <div class="container-fluid" id="actionsNav">
                         <div class="row">
                             <nav class="actions text-center container">
                                 <ul ui-view="actions">

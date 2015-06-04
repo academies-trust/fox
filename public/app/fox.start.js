@@ -154,10 +154,10 @@ angular.module('fox', [
             };
         };
         fox.checkBodyMargin = debounce(function() {
-            $('#appContent').css('margin-bottom', $('#fixedNav').height());
+            $('#appContent').css('margin-bottom', $('#actionsNav').height());
         },250);
         fox.setActionRowHeight = debounce(function() {
-            $('#actionsNavRow').css('min-height', $('#actionsNav').height());
+            $('#fixedNavRow').css('min-height', $('#fixedNav').height());
         })
 
         $rootScope.$on('$stateChangeSuccess', function() {
